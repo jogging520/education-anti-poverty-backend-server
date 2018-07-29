@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.northbrain.task.model.Constants;
 import com.northbrain.task.model.Message;
 import com.northbrain.task.repository.IMessageRepository;
+import com.northbrain.util.security.Crypt;
 import com.northbrain.util.timer.Clock;
 import lombok.extern.java.Log;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -22,7 +23,8 @@ public class TaskService {
     private final Gson gson;
 
     public TaskService(KafkaTemplate kafkaTemplate,
-                       IMessageRepository messageRepository, Gson gson) {
+                       IMessageRepository messageRepository,
+                       Gson gson) {
         this.kafkaTemplate = kafkaTemplate;
         this.messageRepository = messageRepository;
         this.gson = gson;
