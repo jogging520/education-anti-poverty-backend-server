@@ -18,18 +18,18 @@ import java.util.Date;
 @Document
 public class Session {
     @Id
-    private     String      id;         //id号
+    private     String      id;                 //id号
     @NotNull
-    private     String      type;       //类型
+    private     String      type;               //类型
     @NotNull
-    private     String      appType;    //应用类型：WEB CMS APP WCT LED MNT
+    private     String      appType;            //应用类型：WEB CMS APP WCT LED MNT
     @NotNull
-    private     String      category;   //类别（企业）
+    private     String      category;           //类别（企业）
     @NotNull
-    private     String      user;       //用户编号
+    private     String      user;               //用户编号
     @NotNull
-    private     String      userName;   //用户名
-    private     String      mobile;     //手机号
+    private     String      userName;           //用户名
+    private     String      mobile;             //手机号
     @NotNull
     private     Date        loginTime;          //登录时间
     @NotNull
