@@ -5,7 +5,7 @@ import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public interface ISchoolRepository extends ReactiveCrudRepository {
+public interface ISchoolRepository extends ReactiveCrudRepository<School, String> {
     Flux<School> findByCategoryAndRegionIn(String category, String[] regions);
 
     Flux<School> findByCategoryAndNameLike(String category, String name);

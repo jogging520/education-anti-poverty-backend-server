@@ -20,7 +20,8 @@ public class SchoolService {
     private final ISchoolHistoryRepository schoolHistoryRepository;
 
     //构造方法
-    public SchoolService(ISchoolRepository schoolRepository, ISchoolHistoryRepository schoolHistoryRepository){
+    public SchoolService(ISchoolRepository schoolRepository,
+                         ISchoolHistoryRepository schoolHistoryRepository) {
         this.schoolRepository = schoolRepository;
         this.schoolHistoryRepository = schoolHistoryRepository;
     }
@@ -85,7 +86,7 @@ public class SchoolService {
      */
     public Flux<School> querySchoolsByRegions(String serialNo,
                                               String category,
-                                              String[] regions){
+                                              String[] regions) {
         return this.schoolRepository.findByCategoryAndRegionIn(category,regions)
                 .map(school -> {
                     log.info(Constants.SCHOOL_OPERATION_SERIAL_NO + serialNo);
