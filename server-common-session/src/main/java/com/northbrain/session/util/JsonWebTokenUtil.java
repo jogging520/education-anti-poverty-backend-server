@@ -22,19 +22,36 @@ import java.util.Map;
  */
 @Log
 public class JsonWebTokenUtil {
-    public static String generateJsonWebToken(String session, String appType, String key,
-                                              String company, String audience, String issuer, Long lifeTime) throws Exception{
+    /**
+     * 方法：生成JWT token
+     * @param session 会话编号
+     * @param appType 应用类型
+     * @param key 密钥
+     * @param company 公司
+     * @param audience 受众
+     * @param issuer 发行者
+     * @param lifeTime 寿命
+     * @return JWT token
+     * @throws Exception 异常
+     */
+    public static String generateJsonWebToken(String session,
+                                              String appType,
+                                              String key,
+                                              String company,
+                                              String audience,
+                                              String issuer,
+                                              Long lifeTime) throws Exception {
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
-        long currentTimeMillis = System.currentTimeMillis();
-        Date now =new Date(currentTimeMillis);
+        Long currentTimeMillis = System.currentTimeMillis();
+        Date now = new Date(currentTimeMillis);
 
         //生成签名密钥
-        byte[] keySecretBytes =key.getBytes();
-        Key secretKey =new SecretKeySpec(keySecretBytes,signatureAlgorithm.getJcaName());
+        byte[] keySecretBytes = key.getBytes();
+        Key secretKey = new SecretKeySpec(keySecretBytes,signatureAlgorithm.getJcaName());
 
         //claims 私有部分，只保留ID号
         Map<String,Object> claims = new HashMap<>();
-        claims.put(Constants.SESSION_JWT_CLAIMS_SESSION,session);
+        claims.put(Constants.SESSION_JWT_CLAIMS_SESSION, session);
         claims.put(Constants.SESSION_JWT_CLAIMS_APP_TYPE, appType);
         //添加构成JWT的参数
         JwtBuilder jwtBuilder = Jwts
@@ -58,9 +75,22 @@ public class JsonWebTokenUtil {
         return jwtBuilder.compact();
 
     }
-    public static Map<String, String> parseJsonWebToken(String jsonWebToken, String key, String company,
-                                                        String audience, String issuer)
-            throws Exception {
+
+    /**
+     * 方法：解析JWT token
+     * @param jsonWebToken JWT token
+     * @param key 密钥
+     * @param company 公司
+     * @param audience 受众
+     * @param issuer 发行者
+     * @return token申明内容
+     * @throws Exception 异常
+     */
+    public static Map<String, String> parseJsonWebToken(String jsonWebToken,
+                                                        String key,
+                                                        String company,
+                                                        String audience,
+                                                        String issuer) throws Exception {
         Claims claims = Jwts.parser()
                 .setSigningKey(key.getBytes(Constants.SESSION_JWT_TOKEN_KEY_CHARSET))
                 .parseClaimsJws(jsonWebToken.replace(Constants.SESSION_JWT_TOKEN_PREFIX, ""))
@@ -86,5 +116,4 @@ public class JsonWebTokenUtil {
 
         return privateClaims;
     }
-
 }
