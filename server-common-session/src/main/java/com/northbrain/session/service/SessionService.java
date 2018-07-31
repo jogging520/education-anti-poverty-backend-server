@@ -58,7 +58,6 @@ public class SessionService {
                                      String userName,
                                      String mobile) {
         log.info(Constants.SESSION_OPERATION_SERIAL_NO + serialNo);
-
         return this.sessionRepository
                 .findByAppTypeAndCategoryAndStatusAndUserName(appType, category,
                         Constants.SESSION_STATUS_LOGIN, userName
