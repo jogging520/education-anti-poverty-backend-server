@@ -88,7 +88,7 @@ public class StrategyService {
                     log.info(strategy.toString());
 
                     this.strategyHistoryRepository
-                            .save(StrategyHistory.bulider()
+                            .save(StrategyHistory.builder()
                                     .operationType(Constants.STRATEGY_HISTORY_CREATE)
                                     .strategyId(strategy.getId())
                                     .type(strategy.getType())
