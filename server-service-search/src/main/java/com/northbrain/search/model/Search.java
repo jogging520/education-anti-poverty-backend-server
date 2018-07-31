@@ -3,6 +3,7 @@ package com.northbrain.search.model;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotNull;
@@ -29,6 +30,7 @@ public class Search {
     @NotNull
     private String                  category;           //类别（企业）
     @NotNull
+    @Indexed
     private String                  user;               //用户编号
     @NotNull
     private String                  condition;          //搜索条件

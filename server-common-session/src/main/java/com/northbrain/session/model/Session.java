@@ -3,6 +3,7 @@ package com.northbrain.session.model;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotNull;
@@ -28,6 +29,7 @@ public class Session {
     @NotNull
     private     String      user;               //用户编号
     @NotNull
+    @Indexed
     private     String      userName;           //用户名
     private     String      mobile;             //手机号
     @NotNull
