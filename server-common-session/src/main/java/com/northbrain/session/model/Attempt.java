@@ -3,6 +3,7 @@ package com.northbrain.session.model;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotNull;
@@ -28,6 +29,7 @@ public class Attempt {
     private String                  appType;            //应用类型
     @NotNull
     private String                  category;           //类别（企业）
+    @Indexed
     private String                  userName;           //尝试登录用户名
     private String                  password;           //尝试登录密码
     private String                  mobile;             //尝试登录手机号码

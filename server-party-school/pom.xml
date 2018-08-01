@@ -25,7 +25,6 @@
 	</properties>
 
 	<dependencies>
-		<!-- northbrain base-common-util -->
 		<dependency>
 			<groupId>com.northbrain</groupId>
 			<artifactId>server-base-util</artifactId>

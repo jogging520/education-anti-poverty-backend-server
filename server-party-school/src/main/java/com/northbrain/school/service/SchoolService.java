@@ -119,8 +119,11 @@ public class SchoolService {
      * @return 学校信息
      */
     public Mono<School> querySchoolById(String serialNo,
+                                        String category,
                                         String schoolId){
-        return this.schoolRepository.findById(schoolId)
+        return this.schoolRepository
+                .findById(schoolId)
+                .filter(school -> school.getCategory().equalsIgnoreCase(category))
                 .map(school -> {
                     log.info(Constants.SCHOOL_OPERATION_SERIAL_NO + serialNo);
                     log.info(school.toString());
@@ -128,7 +131,4 @@ public class SchoolService {
                     return school;
                 });
     }
-
-
-
-    }
+}

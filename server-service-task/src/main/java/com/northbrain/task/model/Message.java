@@ -3,6 +3,7 @@ package com.northbrain.task.model;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotNull;
@@ -25,6 +26,7 @@ public class Message {
     @NotNull
     private String                  type;               //类型
     @NotNull
+    @Indexed
     private String                  category;           //类别（企业）
     @NotNull
     private String[]                appTypes;           //接收的app类型

@@ -3,15 +3,10 @@ package com.northbrain.strategy.controller;
 import com.northbrain.strategy.model.Constants;
 import com.northbrain.strategy.service.StrategyService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 
-/**
- * @author
- * @create 2018-07-30 15:55
- **/
-@Controller
+@RestController
 public class StrategyController {
 
     private final StrategyService strategyService;

@@ -3,6 +3,7 @@ package com.northbrain.school.model;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotNull;
@@ -21,6 +22,7 @@ public class School {
     @NotNull
     private String      type;             //类型
     @NotNull
+    @Indexed(unique = true)
     private String      name;             //学校名称
     @NotNull
     private String      category;         //类别（企业）
