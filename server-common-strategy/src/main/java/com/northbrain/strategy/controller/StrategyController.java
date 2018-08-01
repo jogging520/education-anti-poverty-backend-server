@@ -1,7 +1,6 @@
 package com.northbrain.strategy.controller;
 
 import com.northbrain.strategy.model.Constants;
-import com.northbrain.strategy.model.Strategy;
 import com.northbrain.strategy.service.StrategyService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
