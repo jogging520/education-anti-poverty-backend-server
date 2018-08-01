@@ -10,8 +10,8 @@ import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-@Log
 @Service
+@Log
 public class FamilyService {
     private final IFamilyRepository familyRepository;
     private final IFamilyHistoryRepository familyHistoryRepository;
@@ -44,8 +44,8 @@ public class FamilyService {
                                         .setTimestamp(Clock.currentTime())
                                         .setSerialNo(serialNo))
                                 .map(newFamily -> {
-//                                    log.info(Constants.FAMILY_OPERATION_SERIAL_NO + serialNo);
-//                                    log.info(family.toString());
+                                    log.info(Constants.FAMILY_OPERATION_SERIAL_NO + serialNo);
+                                    log.info(family.toString());
                                     this.familyHistoryRepository
                                             .save(FamilyHistory.builder()
                                                     .operationType(Constants.FAMILY_HISTORY_CREATE)
