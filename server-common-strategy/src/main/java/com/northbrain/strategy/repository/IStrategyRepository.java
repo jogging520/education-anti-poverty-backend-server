@@ -1,6 +1,5 @@
 package com.northbrain.strategy.repository;
 
-import com.northbrain.strategy.model.Strategy;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Flux;
 
