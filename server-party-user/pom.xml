@@ -50,7 +50,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>com.northbrain.user.ServerPartyUserApplication</mainClass>
+							<mainClass>com.northbrain.user.UserApplication</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>
