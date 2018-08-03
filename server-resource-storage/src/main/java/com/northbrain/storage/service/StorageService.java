@@ -5,6 +5,8 @@ import com.github.tobato.fastdfs.exception.FdfsUnsupportStorePathException;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
 import com.northbrain.storage.model.Constants;
 import com.northbrain.storage.model.Storage;
+import com.northbrain.storage.model.StorageHistory;
+import com.northbrain.storage.repository.IStorageHistoryRepository;
 import com.northbrain.storage.repository.IStorageRepository;
 import com.northbrain.util.timer.Clock;
 import com.northbrain.util.tracer.StackTracer;
@@ -23,11 +25,14 @@ import java.nio.charset.Charset;
 public class StorageService {
     private final FastFileStorageClient fastFileStorageClient;
     private final IStorageRepository storageRepository;
+    private final IStorageHistoryRepository storageHistoryRepository;
 
     public StorageService(FastFileStorageClient fastFileStorageClient,
-                          IStorageRepository storageRepository) {
+                          IStorageRepository storageRepository,
+                          IStorageHistoryRepository storageHistoryRepository) {
         this.fastFileStorageClient = fastFileStorageClient;
         this.storageRepository = storageRepository;
+        this.storageHistoryRepository = storageHistoryRepository;
     }
 
     /**
@@ -38,7 +43,7 @@ public class StorageService {
      * @param multipartFile 文件
      * @return 存储成功的文件名（全名）
      */
-    public Mono<Storage> uploadFile(String serialNo,
+    public Mono<Storage> createFile(String serialNo,
                                     String type,
                                     String category,
                                     MultipartFile multipartFile) {
@@ -79,7 +84,7 @@ public class StorageService {
      * @param extension 扩展名
      * @return 存储成功的文件名（全名）
      */
-    public Mono<Storage> uploadFileContent(String serialNo,
+    public Mono<Storage> createFileContent(String serialNo,
                                            String type,
                                            String category,
                                            String content,
@@ -117,12 +122,14 @@ public class StorageService {
      * @param serialNo 流水号
      * @param type 文件类型
      * @param category 类别（企业）
+     * @param storage 存储id
      * @param fileUrl 文件访问地址
      * @return 存储成功的文件名（全名）
      */
     public Mono<Storage> deleteFile(String serialNo,
                                     String type,
                                     String category,
+                                    String storage,
                                     String fileUrl) {
         log.info(Constants.STORAGE_OPERATION_SERIAL_NO + serialNo);
 
@@ -132,17 +139,38 @@ public class StorageService {
             this.fastFileStorageClient.deleteFile(storePath.getGroup(), storePath.getPath());
 
             return this.storageRepository
-                    .save(Storage.builder()
-                            .type(type)
-                            .name(storePath.getFullPath())
-                            .category(category)
-                            .createTime(Clock.currentTime())
-                            .timestamp(Clock.currentTime())
-                            .status(Constants.STORAGE_STATUS_ACTIVE)
-                            .serialNo(serialNo)
-                            .description(Constants.STORAGE_AUTO_DESCRIPTION)
-                            .build())
-                    .map(storage -> storage.setStatus(Constants.STORAGE_ERRORCODE_SUCCESS));
+                    .findById(storage)
+                    .flatMap(newStorage -> {
+                        this.storageHistoryRepository
+                                .save(StorageHistory.builder()
+                                        .operationType(Constants.STORAGE_HISTORY_DELETE)
+                                        .storageId(storage)
+                                        .type(newStorage.getType())
+                                        .category(newStorage.getCategory())
+                                        .createTime(newStorage.getCreateTime())
+                                        .timestamp(Clock.currentTime())
+                                        .status(newStorage.getStatus())
+                                        .serialNo(serialNo)
+                                        .description(newStorage.getDescription())
+                                        .build())
+                                .subscribe();
+
+                        this.storageRepository
+                                .deleteById(storage)
+                                .then();
+
+                        return Mono.just(Storage.builder()
+                                .id(storage)
+                                .type(type)
+                                .name(storePath.getFullPath())
+                                .category(category)
+                                .createTime(Clock.currentTime())
+                                .timestamp(Clock.currentTime())
+                                .status(Constants.STORAGE_ERRORCODE_SUCCESS)
+                                .serialNo(serialNo)
+                                .description(Constants.STORAGE_AUTO_DESCRIPTION)
+                                .build());
+                    });
 
         } catch (FdfsUnsupportStorePathException e) {
             StackTracer.printException(e);

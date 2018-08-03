@@ -15,7 +15,6 @@ public class Constants {
      * restful资源定义
      */
     public final static String  STORAGE_HTTP_REQUEST_MAPPING                    =   "/storage";       //存储rest
-    public final static String  STORAGE_FILE_HTTP_REQUEST_MAPPING               =   "/storage/files";       //文件上传rest
     public final static String  STORAGE_CONTENT_HTTP_REQUEST_MAPPING            =   "/storage/contents";    //内容上传rest
 
     /**
