@@ -3,6 +3,7 @@ package com.northbrain.privilige.model;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotNull;
@@ -29,6 +30,7 @@ public class Permission {
     @NotNull
     private String                  type;               //类型，增删改查
     @NotNull
+    @Indexed
     private String                  name;               //名称
     @NotNull
     private String                  domain;             //归属域，如菜单、列表、按钮等
