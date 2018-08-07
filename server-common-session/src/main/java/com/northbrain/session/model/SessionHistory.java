@@ -1,12 +1,12 @@
 package com.northbrain.session.model;
 
+import javax.validation.constraints.NotNull;
 
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
@@ -34,6 +34,8 @@ public class SessionHistory {
     @NotNull
     private String                  userName;           //用户名
     private String                  mobile;             //手机号码
+    @NotNull
+    private String                  address;            //客户端IP
     @NotNull
     private Date                    loginTime;          //登录时间
     @NotNull

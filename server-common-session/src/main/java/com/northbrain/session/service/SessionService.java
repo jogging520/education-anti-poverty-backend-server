@@ -6,8 +6,8 @@ import com.northbrain.session.repository.IAttemptRepository;
 import com.northbrain.session.repository.ISessionHistoryRepository;
 import com.northbrain.session.repository.ISessionRepository;
 import com.northbrain.session.util.JsonWebTokenUtil;
-
 import com.northbrain.util.security.Crypt;
+
 import com.northbrain.util.timer.Clock;
 import com.northbrain.util.tracer.StackTracer;
 import org.springframework.stereotype.Service;
@@ -49,6 +49,7 @@ public class SessionService {
      * @param user 用户编号
      * @param userName 用户名
      * @param mobile 手机号码
+     * @param address 客户端IP地址
      * @return 令牌
      */
     public Mono<Token> createSession(String serialNo,
@@ -56,12 +57,13 @@ public class SessionService {
                                      String category,
                                      String user,
                                      String userName,
-                                     String mobile) {
+                                     String mobile,
+                                     String address) {
         log.info(Constants.SESSION_OPERATION_SERIAL_NO + serialNo);
+
         return this.sessionRepository
                 .findByAppTypeAndCategoryAndStatusAndUserName(appType, category,
-                        Constants.SESSION_STATUS_LOGIN, userName
-                )
+                        Constants.SESSION_STATUS_LOGIN, userName)
                 .switchIfEmpty(
                         this.sessionRepository.save(Session
                                 .builder()
@@ -71,6 +73,7 @@ public class SessionService {
                                 .user(user)
                                 .userName(userName)
                                 .mobile(mobile)
+                                .address(address)
                                 .createTime(Clock.currentTime())
                                 .loginTime(Clock.currentTime())
                                 .timestamp(Clock.currentTime())
@@ -86,6 +89,7 @@ public class SessionService {
                         .user(user)
                         .userName(userName)
                         .mobile(mobile)
+                        .address(address)
                         .createTime(session.getCreateTime())
                         .loginTime(Clock.currentTime())
                         .timestamp(Clock.currentTime())
@@ -100,7 +104,7 @@ public class SessionService {
                                         .session(session.getId())
                                         .user(user)
                                         .lifeTime(this.tokenProperty.getLifeTime())
-                                        .jwt(JsonWebTokenUtil.generateJsonWebToken(session.getId(), appType,
+                                        .jwt(JsonWebTokenUtil.generateJsonWebToken(session.getId(), appType, address,
                                                 tokenProperty.getKey(), tokenProperty.getCompany(), tokenProperty.getAudience(),
                                                 tokenProperty.getIssuer(), tokenProperty.getLifeTime()))
                                         .downPublicKey(this.crypt.getDownPublicKey(appType))
@@ -121,19 +125,22 @@ public class SessionService {
     /**
      * 方法：删除会话，并移入历史库
      * @param serialNo 流水号
-     * @param session 会话编号
      * @param appType 应用类型
      * @param category 类别（企业）
+     * @param session 会话编号
+     * @param address 客户端IP地址
      * @return 无
      */
     public Mono<Void> deleteSession(String serialNo,
-                                    String session,
                                     String appType,
-                                    String category) {
+                                    String category,
+                                    String session,
+                                    String address) {
         this.sessionRepository
                 .findById(session)
                 .filter(newSession -> newSession.getAppType().equalsIgnoreCase(appType))
                 .filter(newSession -> newSession.getCategory().equalsIgnoreCase(category))
+                .filter(newSession -> newSession.getAddress().equalsIgnoreCase(address))
                 .subscribe(newSession -> {
                     log.info(Constants.SESSION_OPERATION_SERIAL_NO + serialNo);
                     log.info(newSession.toString());
@@ -148,6 +155,7 @@ public class SessionService {
                                     .user(newSession.getUser())
                                     .userName(newSession.getUserName())
                                     .mobile(newSession.getMobile())
+                                    .address(newSession.getAddress())
                                     .loginTime(newSession.getLoginTime())
                                     .lifeTime(newSession.getLifeTime())
                                     .createTime(newSession.getCreateTime())
@@ -175,12 +183,14 @@ public class SessionService {
      * @param serialNo 流水号
      * @param appType 应用类型
      * @param category 类别（企业）
+     * @param address 客户端IP地址
      * @param jwt json web token
      * @return 校验结果（正常、异常、失效、无会话等），如果无效，那么lifetime=0
      */
     public Mono<Token> verifyJWT(String serialNo,
                                  String appType,
                                  String category,
+                                 String address,
                                  String jwt) {
         log.info(Constants.SESSION_OPERATION_SERIAL_NO + serialNo);
 
@@ -189,11 +199,15 @@ public class SessionService {
                     .parseJsonWebToken(jwt, tokenProperty.getKey(), tokenProperty.getCompany(),
                             tokenProperty.getAudience(), tokenProperty.getIssuer());
 
+
             return this.sessionRepository
                     .findById(claims.get(Constants.SESSION_JWT_CLAIMS_SESSION))
                     .filter(session -> session.getStatus().equalsIgnoreCase(Constants.SESSION_STATUS_LOGIN))
-                    .filter(session -> session.getAppType().equalsIgnoreCase(appType))
+                    .filter(session -> session.getAppType().equalsIgnoreCase(appType) &&
+                            session.getAppType().equalsIgnoreCase(claims.get(Constants.SESSION_JWT_CLAIMS_APP_TYPE)))
                     .filter(session -> session.getCategory().equalsIgnoreCase(category))
+                    .filter(session -> session.getAddress().equalsIgnoreCase(address) &&
+                            session.getAddress().equalsIgnoreCase(claims.get(Constants.SESSION_JWT_CLAIMS_ADDRESS)))
                     .filter(session -> session.getLoginTime().getTime() + session.getLifeTime() >= System.currentTimeMillis())
                     .switchIfEmpty(Mono.just(Session.builder().build()))
                     .flatMap(session -> {
@@ -283,7 +297,7 @@ public class SessionService {
                                      String appType,
                                      String category) {
         this.attemptRepository
-                .findByUserNameAndAppTypeAndCategory(userName, appType, category)
+                .findAllByUserNameAndAppTypeAndCategory(userName, appType, category)
                 .subscribe(attempt -> {
                     log.info(Constants.SESSION_OPERATION_SERIAL_NO + serialNo);
                     log.info(attempt.toString());
@@ -301,7 +315,7 @@ public class SessionService {
                                     .attemptTime(attempt.getAttemptTime())
                                     .timestamp(Clock.currentTime())
                                     .status(attempt.getStatus())
-                                    .serialNo(attempt.getSerialNo())
+                                    .serialNo(serialNo)
                                     .description(attempt.getDescription())
                                     .build())
                             .subscribe(attemptHistory -> {
