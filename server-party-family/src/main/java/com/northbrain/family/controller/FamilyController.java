@@ -28,7 +28,7 @@ public class FamilyController {
      *
      */
     @PostMapping(Constants.FAMILY_HTTP_REQUEST_MAPPING)
-    public ResponseEntity<Flux<Family>> createFamliies(@RequestParam String serialNo,
+    public ResponseEntity<Flux<Family>> createFamilies(@RequestParam String serialNo,
                                                        @RequestParam String category,
                                                        @RequestParam Flux<Family> families){
         return ResponseEntity.ok()
