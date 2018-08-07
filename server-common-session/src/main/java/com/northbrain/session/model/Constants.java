@@ -22,6 +22,7 @@ public class Constants {
 
     public final static String SESSION_JWT_CLAIMS_SESSION                           =   "session";          //JWT的申明内容的私有部分：会话编号
     public final static String SESSION_JWT_CLAIMS_APP_TYPE                          =   "appType";          //JWT的申明内容的私有部分：应用类型
+    public final static String SESSION_JWT_CLAIMS_ADDRESS                           =   "address";          //JWT的申明内容的私有部分：IP地址
     public final static String SESSION_JWT_HEADER_PARAM_TYPE_NAME                   =   "typ";              //JWT的申明内容的公共部分：类型
     public final static String SESSION_JWT_HEADER_PARAM_TYPE_VALUE                  =   "JWT";              //JWT的申明内容的公共部分：类型取值
     public final static String SESSION_JWT_TOKEN_PREFIX                             =   "Bearer ";          //JWT的前缀
@@ -52,4 +53,5 @@ public class Constants {
      */
     public final static String SESSION_ERRORCODE_SUCCESS                            =   "SUCCESS";
     public final static String SESSION_ERRORCODE_TOKEN_EXPIRED                      =   "ERROR_COMMON_SESSION_TOKEN_EXPIRED";  //token已经失效
+
 }

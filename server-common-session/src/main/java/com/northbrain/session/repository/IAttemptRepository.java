@@ -12,8 +12,9 @@ public interface IAttemptRepository extends ReactiveCrudRepository<Attempt, Stri
                                                                            String category,
                                                                            Date fromAttemptTime,
                                                                            Date toAttemptTime);
+
     Flux<Attempt> findByUserNameAndAppTypeAndCategory(String userName,
-                                                      String appType,
-                                                      String category);
+                                                         String appType,
+                                                         String category);
 
 }
