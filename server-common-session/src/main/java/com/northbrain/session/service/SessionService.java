@@ -297,7 +297,7 @@ public class SessionService {
                                      String appType,
                                      String category) {
         this.attemptRepository
-                .findAllByUserNameAndAppTypeAndCategory(userName, appType, category)
+                .findByUserNameAndAppTypeAndCategory(userName, appType, category)
                 .subscribe(attempt -> {
                     log.info(Constants.SESSION_OPERATION_SERIAL_NO + serialNo);
                     log.info(attempt.toString());
