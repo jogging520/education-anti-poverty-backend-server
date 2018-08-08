@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Map;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.*;
@@ -28,6 +29,7 @@ public class UserHistory {
     @NotNull
     private String                  type;               //类型
     @NotNull
+    @Indexed
     private String                  name;               //用户名称
     @NotNull
     private String                  password;           //密码
@@ -39,6 +41,7 @@ public class UserHistory {
     @NotNull
     private String[]                appTypes;           //可以登录的应用类型
     @NotNull
+    @Indexed
     private String                  category;           //类别（企业）
     @NotNull
     private String[]                roles;              //角色

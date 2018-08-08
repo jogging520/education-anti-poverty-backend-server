@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.*;
@@ -23,10 +24,12 @@ public class RoleHistory {
     @NotNull
     private String                  operationType;      //操作类型
     @NotNull
+    @Indexed
     private String                  roleId;             //角色编号
     @NotNull
     private String                  type;               //类型
     @NotNull
+    @Indexed
     private String                  name;               //名称
     @NotNull
     private String[]                appTypes;           //应用类型

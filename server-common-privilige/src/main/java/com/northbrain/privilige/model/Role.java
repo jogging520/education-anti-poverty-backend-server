@@ -3,6 +3,7 @@ package com.northbrain.privilige.model;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotNull;
@@ -21,6 +22,7 @@ public class Role {
     @NotNull
     private String                  type;               //类型
     @NotNull
+    @Indexed
     private String                  name;               //名称
     @NotNull
     private String[]                appTypes;           //应用类型
