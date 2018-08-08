@@ -1,18 +1,20 @@
 package com.northbrain.user.controller;
 
 import com.northbrain.user.model.Authentication;
-import com.northbrain.user.model.Constants;
 import com.northbrain.user.model.User;
 import com.northbrain.user.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.northbrain.user.model.Constants;
+
 import reactor.core.publisher.Mono;
 
 @RestController
 public class UserController {
     private final UserService userService;
 
-    public UserController(UserService userService){
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
@@ -32,17 +34,18 @@ public class UserController {
                                                            @RequestParam(required = false) String name,
                                                            @RequestParam(required = false) String password,
                                                            @RequestParam(required = false) String mobile) {
+        if(name != null && password != null)
+            return ResponseEntity.ok()
+                    .body(this.userService
+                            .verifyUserByNameAndPassword(serialNo, appType, category, name, password));
+        else if(mobile != null)
+            return ResponseEntity.ok()
+                    .body(this.userService
+                            .verifyByMobile(serialNo, appType, category, mobile));
 
-        if(name != null && password != null){
-            return ResponseEntity.ok().body(this.userService.verifyUserByNameAndPassword(serialNo,appType,category,name,password));
-        }else if(mobile != null){
-            return ResponseEntity.ok().body(this.userService.verifyByMobile(serialNo,appType,category,mobile));
-        }
-
-        return ResponseEntity.badRequest().body(null);
-
+        return ResponseEntity.badRequest()
+                .body(null);
     }
-
 
     /**
      * 方法：创建新用户
@@ -79,6 +82,5 @@ public class UserController {
                 .body(this.userService
                         .queryUserById(serialNo, appType, category, userId));
     }
-
 
 }

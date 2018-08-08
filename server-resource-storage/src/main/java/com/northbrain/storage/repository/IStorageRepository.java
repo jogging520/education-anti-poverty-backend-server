@@ -5,5 +5,5 @@ import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Mono;
 
 public interface IStorageRepository extends ReactiveCrudRepository<Storage, String> {
-    Mono<Void> ByTypeAndNameAndCategory(String type, String name, String category);
+    Mono<Void> findByTypeAndNameAndCategory(String type, String name, String category);
 }
