@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
-@ComponentScan("com.northbrain")
+@ComponentScan({"com.northbrain"})
 @Import(FdfsClientConfig.class)
 public class StorageApplication {
 
