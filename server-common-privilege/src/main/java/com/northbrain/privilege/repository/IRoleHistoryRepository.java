@@ -1,6 +1,6 @@
-package com.northbrain.privilige.repository;
+package com.northbrain.privilege.repository;
 
-import com.northbrain.privilige.model.RoleHistory;
+import com.northbrain.privilege.model.RoleHistory;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 
 public interface IRoleHistoryRepository extends ReactiveCrudRepository<RoleHistory, String > {

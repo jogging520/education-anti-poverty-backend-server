@@ -1,6 +1,6 @@
-package com.northbrain.privilige.repository;
+package com.northbrain.privilege.repository;
 
-import com.northbrain.privilige.model.Permission;
+import com.northbrain.privilege.model.Permission;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Flux;
 

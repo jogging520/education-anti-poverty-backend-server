@@ -1,4 +1,5 @@
-package com.northbrain.privilige.model;
+package com.northbrain.privilege.model;
+
 
 import javax.validation.constraints.NotNull;
 

@@ -1,12 +1,12 @@
-package com.northbrain.privilige.service;
+package com.northbrain.privilege.service;
 
-import com.northbrain.privilige.model.Constants;
-import com.northbrain.privilige.model.Permission;
-import com.northbrain.privilige.model.Role;
-import com.northbrain.privilige.model.RoleHistory;
-import com.northbrain.privilige.repository.IPermissionRepository;
-import com.northbrain.privilige.repository.IRoleHistoryRepository;
-import com.northbrain.privilige.repository.IRoleRepository;
+import com.northbrain.privilege.model.Constants;
+import com.northbrain.privilege.model.Permission;
+import com.northbrain.privilege.model.Role;
+import com.northbrain.privilege.model.RoleHistory;
+import com.northbrain.privilege.repository.IPermissionRepository;
+import com.northbrain.privilege.repository.IRoleHistoryRepository;
+import com.northbrain.privilege.repository.IRoleRepository;
 import com.northbrain.util.timer.Clock;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;

@@ -3,12 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>server-common-privilige</artifactId>
+	<groupId>com.northbrain</groupId>
+	<artifactId>server-common-privilege</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>server-common-privilige</name>
-	<description>server-common-privilige</description>
+	<name>server-common-privilege</name>
+	<description>server-common-privilege</description>
 
 	<parent>
 		<groupId>com.northbrain</groupId>
@@ -50,7 +51,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>com.northbrain.menu.MenuApplication</mainClass>
+							<mainClass>com.northbrain.privilege.PrivilegeApplication</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>

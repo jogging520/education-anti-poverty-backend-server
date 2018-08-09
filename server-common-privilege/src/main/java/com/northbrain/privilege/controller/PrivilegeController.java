@@ -1,9 +1,9 @@
-package com.northbrain.privilige.controller;
+package com.northbrain.privilege.controller;
 
-import com.northbrain.privilige.model.Constants;
-import com.northbrain.privilige.model.Permission;
-import com.northbrain.privilige.model.Role;
-import com.northbrain.privilige.service.PrivilegeService;
+import com.northbrain.privilege.model.Constants;
+import com.northbrain.privilege.model.Permission;
+import com.northbrain.privilege.model.Role;
+import com.northbrain.privilege.service.PrivilegeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;

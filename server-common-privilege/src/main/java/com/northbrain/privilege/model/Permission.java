@@ -1,4 +1,5 @@
-package com.northbrain.privilige.model;
+package com.northbrain.privilege.model;
+
 
 import lombok.*;
 import lombok.experimental.Accessors;
