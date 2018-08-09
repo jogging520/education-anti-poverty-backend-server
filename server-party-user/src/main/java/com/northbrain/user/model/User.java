@@ -24,7 +24,7 @@ public class User {
     @NotNull
     private String                  type;               //类型
     @NotNull
-    @Indexed
+    @Indexed(unique = true)
     private String                  name;               //用户名称
     @NotNull
     private String                  password;           //密码
@@ -36,13 +36,12 @@ public class User {
     @NotNull
     private String[]                appTypes;           //可以登录的应用类型
     @NotNull
-    @Indexed
     private String                  category;           //类别（企业）
     @NotNull
     private String[]                roles;              //角色
     private Integer[]               permissions;        //权限
     @NotNull
-    private Map<String, String[]> affiliations;       //归属
+    private Map<String, String[]>   affiliations;       //归属
     private String[]                mobiles;            //手机号码
     private String[]                emails;             //电子邮件
     private String[]                weChats;            //微信号码
