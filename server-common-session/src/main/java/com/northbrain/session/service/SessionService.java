@@ -243,9 +243,15 @@ public class SessionService {
                                         String appType,
                                         String category,
                                         String userName) {
+        String decryptedUserName = this.crypt.decrypt4UserDownStream(userName, appType, true);
+
+        if(decryptedUserName == null || decryptedUserName.equalsIgnoreCase(""))
+            return Mono.just(Constants.SESSION_ATTEMPT_COUNT_INFINITY);
+
+
         return this.attemptRepository
                 .findByUserNameAndAppTypeAndCategoryAndAttemptTimeBetween(
-                        this.crypt.decrypt4UserDownStream(userName, appType, true),
+                        decryptedUserName,
                         appType, category, Clock.currentDate(), Clock.tomorrowDate())
                 .count()
                 .map(c -> {
@@ -268,7 +274,6 @@ public class SessionService {
                                        String category,
                                        Attempt attempt) {
 
-        log.info(attempt.toString());
         return this.attemptRepository
                 .save(attempt
                         .setAppType(appType)
@@ -279,7 +284,6 @@ public class SessionService {
                         .setTimestamp(Clock.currentTime()))
                 .map(newAttempt -> {
                     log.info(Constants.SESSION_OPERATION_SERIAL_NO + serialNo);
-                    log.info(newAttempt.toString());
                     return newAttempt.setStatus(Constants.SESSION_ERRORCODE_SUCCESS);
                 });
     }

@@ -4,6 +4,7 @@ import com.northbrain.util.model.Constants;
 import com.northbrain.util.model.SecurityProperty;
 import com.northbrain.util.tracer.StackTracer;
 import lombok.extern.java.Log;
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.BadPaddingException;
@@ -97,6 +98,8 @@ public class Crypt {
      */
     private String encrypt(byte[] data, String base64PublicKey) {
         String encryptedData = null;
+
+
 
         try {
             Cipher cipher = Cipher.getInstance(Constants.UTIL_SECURITY_ASYMMETRIC_ALGORITHM);
