@@ -82,6 +82,12 @@
 			<artifactId>spring-cloud-context</artifactId>
 			<version>${spring-cloud.version}</version>
 		</dependency>
+		<!-- commons-lang -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons.lang.version}</version>
+		</dependency>
 	</dependencies>
 
 	<!-- 子项目包含，需要申明 -->
@@ -128,12 +134,6 @@
 				<groupId>com.github.tobato</groupId>
 				<artifactId>fastdfs-client</artifactId>
 				<version>${fastdfs.version}</version>
-			</dependency>
-			<!-- commons-lang -->
-			<dependency>
-				<groupId>org.apache.commons</groupId>
-				<artifactId>commons-lang3</artifactId>
-				<version>${commons.lang.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
