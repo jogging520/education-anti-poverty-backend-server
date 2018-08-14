@@ -61,9 +61,18 @@ public class SessionService {
                                      String address) {
         log.info(Constants.SESSION_OPERATION_SERIAL_NO + serialNo);
 
+        String decryptedUserName = this.crypt.decrypt4UserDownStream(userName, appType, true);
+
+        if(decryptedUserName == null || decryptedUserName.equalsIgnoreCase("")) {
+            return Mono.just(Token.builder()
+                    .lifeTime(0L)
+                    .status(Constants.SESSION_ERRORCODE_TOKEN_EXPIRED)
+                    .build());
+        }
+
         return this.sessionRepository
                 .findByAppTypeAndCategoryAndStatusAndUserName(appType, category,
-                        Constants.SESSION_STATUS_LOGIN, userName)
+                        Constants.SESSION_STATUS_LOGIN, decryptedUserName)
                 .switchIfEmpty(
                         this.sessionRepository.save(Session
                                 .builder()
@@ -71,7 +80,7 @@ public class SessionService {
                                 .appType(appType)
                                 .category(category)
                                 .user(user)
-                                .userName(userName)
+                                .userName(decryptedUserName)
                                 .mobile(mobile)
                                 .address(address)
                                 .createTime(Clock.currentTime())
@@ -87,7 +96,7 @@ public class SessionService {
                         .appType(appType)
                         .category(category)
                         .user(user)
-                        .userName(userName)
+                        .userName(decryptedUserName)
                         .mobile(mobile)
                         .address(address)
                         .createTime(session.getCreateTime())
