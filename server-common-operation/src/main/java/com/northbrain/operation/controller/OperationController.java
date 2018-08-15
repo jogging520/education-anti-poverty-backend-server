@@ -57,16 +57,20 @@ public class OperationController {
      * 方法：创建一条操作记录
      * @param appType 应用类型
      * @param category 类别（企业）
+     * @param user 用户编号
+     * @param session 会话编号
      * @param operation 操作记录
      * @return 创建成功的操作记录
      */
     @PostMapping(Constants.OPERATION_HTTP_REQUEST_MAPPING)
     public ResponseEntity<Mono<Operation>> createOperation(@RequestParam String appType,
                                                            @RequestParam String category,
+                                                           @RequestParam String user,
+                                                           @RequestParam String session,
                                                            @RequestBody Operation operation) {
         return ResponseEntity.ok()
                 .body(this.operationService
-                        .createOperation(appType, category, operation));
+                        .createOperation(appType, category, user, session, operation));
     }
 
     /**

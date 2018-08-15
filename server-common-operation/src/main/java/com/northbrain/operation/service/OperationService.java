@@ -122,11 +122,15 @@ public class OperationService {
      * 方法：创建操作记录
      * @param appType 应用类型
      * @param category 类别（企业）
+     * @param user 用户编号
+     * @param session 会话编号
      * @param operation 操作记录
      * @return 创建成功的操作记录
      */
     public Mono<Operation> createOperation(String appType,
                                            String category,
+                                           String user,
+                                           String session,
                                            Operation operation) {
         log.info(operation.toString());
 
@@ -134,6 +138,8 @@ public class OperationService {
                 .save(operation
                         .setAppType(appType)
                         .setCategory(category)
+                        .setUser(user)
+                        .setSession(session)
                         .setStatus(Constants.OPERATION_STATUS_ACTIVE)
                         .setCreateTime(Clock.currentTime())
                         .setTimestamp(Clock.currentTime()))
