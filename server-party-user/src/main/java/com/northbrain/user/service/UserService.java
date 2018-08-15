@@ -52,7 +52,7 @@ public class UserService {
                             .setPassword(null)
                             .setSalt(null)
                             .setRealName(this.crypt.encrypt4UserUpStream(this.crypt.decrypt4System(user.getRealName()), appType))
-                            .setStatus(null);
+                            .setStatus(Constants.USER_ERRORCODE_SUCCESS);
                 });
     }
 
