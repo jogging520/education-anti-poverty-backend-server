@@ -39,7 +39,7 @@ public class StrategyService {
                 .map(strategy -> {
                     log.info(Constants.STRATEGY_OPERATION_SERIAL_NO + serialNo);
                     log.info(strategy.toString());
-                    return strategy;
+                    return strategy.setStatus(Constants.STRATEGY_ERRORCODE_SUCCESS);
                 });
     }
 
@@ -59,7 +59,7 @@ public class StrategyService {
                 .map(strategy -> {
                     log.info(Constants.STRATEGY_OPERATION_SERIAL_NO + serialNo);
                     log.info(strategy.toString());
-                    return strategy;
+                    return strategy.setStatus(Constants.STRATEGY_ERRORCODE_SUCCESS);
                 });
     }
 
@@ -104,7 +104,9 @@ public class StrategyService {
                                     .build());
 
                     return this.strategyRepository
-                            .save(strategy);
+                            .save(strategy)
+                            .map(newStrategy -> newStrategy
+                                    .setStatus(Constants.STRATEGY_ERRORCODE_SUCCESS));
                 });
     }
 }

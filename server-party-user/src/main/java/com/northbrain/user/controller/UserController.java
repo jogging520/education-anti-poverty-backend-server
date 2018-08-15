@@ -70,17 +70,17 @@ public class UserController {
      * @param serialNo 流水号
      * @param appType 应用类型
      * @param category 类别（企业）
-     * @param userId 用户编号
+     * @param id 用户编号
      * @return 用户信息
      */
     @GetMapping(Constants.USER_HTTP_REQUEST_MAPPING)
     public ResponseEntity<Mono<User>> queryUser(@RequestParam String serialNo,
                                                 @RequestParam String appType,
                                                 @RequestParam String category,
-                                                @RequestParam String userId) {
+                                                @RequestParam String id) {
         return ResponseEntity.ok()
                 .body(this.userService
-                        .queryUserById(serialNo, appType, category, userId));
+                        .queryUserById(serialNo, appType, category, id));
     }
 
 }
