@@ -4,6 +4,7 @@ import com.northbrain.user.model.*;
 import com.northbrain.util.security.Crypt;
 import com.northbrain.util.security.Password;
 import com.northbrain.util.timer.Clock;
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.stereotype.Service;
 
 import com.northbrain.user.repository.IUserHistoryRepository;
@@ -11,8 +12,6 @@ import com.northbrain.user.repository.IUserRepository;
 
 import lombok.extern.java.Log;
 import reactor.core.publisher.Mono;
-
-import java.util.Arrays;
 
 @Service
 @Log
@@ -53,7 +52,7 @@ public class UserService {
                             .setPassword(null)
                             .setSalt(null)
                             .setRealName(this.crypt.encrypt4UserUpStream(this.crypt.decrypt4System(user.getRealName()), appType))
-                            .setStatus(null);
+                            .setStatus(Constants.USER_ERRORCODE_SUCCESS);
                 });
     }
 
@@ -78,7 +77,7 @@ public class UserService {
                     log.info(Constants.USER_OPERATION_SERIAL_NO + serialNo);
 
                     if(user.getAppTypes() != null &&
-                            Arrays.asList(user.getAppTypes()).contains(appType) &&
+                            ArrayUtils.contains(user.getAppTypes(), appType) &&
                             Password.verify(user.getPassword(),
                                     this.crypt.decrypt4UserDownStream(password, appType, true),
                                     this.crypt.decrypt4System(user.getSalt()))) {
@@ -120,7 +119,7 @@ public class UserService {
                     log.info(Constants.USER_OPERATION_SERIAL_NO + serialNo);
 
                     if(user.getAppTypes() != null &&
-                            Arrays.asList(user.getAppTypes()).contains(appType)) {
+                            ArrayUtils.contains(user.getAppTypes(), appType)) {
                         return Mono.just(Authentication
                                 .builder()
                                 .user(user.getId())

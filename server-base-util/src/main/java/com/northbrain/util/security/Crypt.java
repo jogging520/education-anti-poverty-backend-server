@@ -98,6 +98,8 @@ public class Crypt {
     private String encrypt(byte[] data, String base64PublicKey) {
         String encryptedData = null;
 
+
+
         try {
             Cipher cipher = Cipher.getInstance(Constants.UTIL_SECURITY_ASYMMETRIC_ALGORITHM);
             cipher.init(Cipher.ENCRYPT_MODE, getPublicKey(base64PublicKey));

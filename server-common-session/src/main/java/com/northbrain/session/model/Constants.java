@@ -32,6 +32,7 @@ public class Constants {
     public final static String SESSION_HINT_JWT_VERIFY_EXPIRATION_FAILURE           =   "JWT已经失效。";
 
     public final static String SESSION_ATTEMPT_AUTO_DESCRIPTION                     =   "system auto.";   //系统自动生成
+    public final static Long   SESSION_ATTEMPT_COUNT_INFINITY                       =   9999L;   //无限大登录次数
 
     /**
      * restful资源定义

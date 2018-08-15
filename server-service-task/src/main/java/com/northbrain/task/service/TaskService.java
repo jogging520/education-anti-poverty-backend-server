@@ -4,16 +4,14 @@ import com.google.gson.Gson;
 import com.northbrain.task.model.Constants;
 import com.northbrain.task.model.Message;
 import com.northbrain.task.repository.IMessageRepository;
-import com.northbrain.util.security.Crypt;
 import com.northbrain.util.timer.Clock;
 import lombok.extern.java.Log;
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.Arrays;
 
 @Service
 @Log
@@ -77,9 +75,9 @@ public class TaskService {
         return this.messageRepository
                 .findByCategoryAndStatus(category, Constants.TASK_STATUS_ACTIVE)
                 .filter(message -> message.getTo() != null &&
-                        (Arrays.asList(message.getTo()).contains(user) ||
-                                Arrays.asList(message.getTo()).contains(role) ||
-                                Arrays.asList(message.getTo()).contains(Constants.TASK_MESSAGE_BROADCAST)))
+                        (ArrayUtils.contains(message.getTo(), user) ||
+                                ArrayUtils.contains(message.getTo(), role) ||
+                                ArrayUtils.contains(message.getTo(), Constants.TASK_MESSAGE_BROADCAST)))
                 .map(message -> {
                     log.info(Constants.TASK_OPERATION_SERIAL_NO + serialNo);
                     log.info(message.toString());
