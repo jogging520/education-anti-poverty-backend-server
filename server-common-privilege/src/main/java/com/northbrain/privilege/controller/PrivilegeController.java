@@ -22,18 +22,18 @@ public class PrivilegeController {
      * @param serialNo 流水号
      * @param category 类别（企业）
      * @param appType 应用类型
-     * @param roles 角色
+     * @param ids 角色
      * @return 权限实体数组
      */
     @GetMapping(Constants.PRIVILEGE_ROLE_HTTP_REQUEST_MAPPING)
-    public ResponseEntity<Flux<Role>> queryRolesByAppType(@RequestParam String serialNo,
-                                                          @RequestParam String category,
-                                                          @RequestParam String appType,
-                                                          @RequestParam String[] roles) {
+    public ResponseEntity<Flux<Role>> queryRoles(@RequestParam String serialNo,
+                                                 @RequestParam String category,
+                                                 @RequestParam String appType,
+                                                 @RequestParam String[] ids) {
         return ResponseEntity
                 .ok()
                 .body(this.privilegeService
-                        .queryRolesByAppType(serialNo, appType, category, roles));
+                        .queryRoles(serialNo, appType, category, ids));
     }
 
     /**
@@ -56,15 +56,15 @@ public class PrivilegeController {
      * 方法：按照ID号查询权限实体信息
      * @param serialNo 流水号
      * @param category 类别（企业）
-     * @param permissions 权限实体编号数组
+     * @param ids 权限实体编号数组
      * @return 权限清单
      */
     @GetMapping(Constants.PRIVILEGE_PERMISSION_HTTP_REQUEST_MAPPING)
     public ResponseEntity<Flux<Permission>> queryPermissionsByIds(@RequestParam String serialNo,
                                                                   @RequestParam String category,
-                                                                  @RequestParam String[] permissions) {
+                                                                  @RequestParam String[] ids) {
         return ResponseEntity.ok()
                 .body(this.privilegeService
-                        .queryPermissionsByIds(serialNo, category, permissions));
+                        .queryPermissionsByIds(serialNo, category, ids));
     }
 }
