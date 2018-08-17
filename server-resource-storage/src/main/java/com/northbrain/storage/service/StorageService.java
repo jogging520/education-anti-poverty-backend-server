@@ -157,7 +157,7 @@ public class StorageService {
 
                         this.storageRepository
                                 .deleteById(storage)
-                                .then();
+                                .subscribe();
 
                         return Mono.just(Storage.builder()
                                 .id(storage)

@@ -137,19 +137,16 @@ public class SessionService {
      * @param appType 应用类型
      * @param category 类别（企业）
      * @param session 会话编号
-     * @param address 客户端IP地址
      * @return 无
      */
     public Mono<Void> deleteSession(String serialNo,
                                     String appType,
                                     String category,
-                                    String session,
-                                    String address) {
+                                    String session) {
         this.sessionRepository
                 .findById(session)
                 .filter(newSession -> newSession.getAppType().equalsIgnoreCase(appType))
                 .filter(newSession -> newSession.getCategory().equalsIgnoreCase(category))
-                .filter(newSession -> newSession.getAddress().equalsIgnoreCase(address))
                 .subscribe(newSession -> {
                     log.info(Constants.SESSION_OPERATION_SERIAL_NO + serialNo);
                     log.info(newSession.toString());
@@ -180,7 +177,7 @@ public class SessionService {
 
                     this.sessionRepository
                             .deleteById(session)
-                            .then();
+                            .subscribe();
                 });
 
         return Mono.empty().then();
@@ -339,7 +336,7 @@ public class SessionService {
 
                     this.attemptRepository
                             .deleteById(attempt.getId())
-                            .then();
+                            .subscribe();
                 });
 
         return Mono.empty().then();

@@ -33,4 +33,22 @@ public class MenuService {
                     return cmsMenu.setStatus(Constants.MENU_ERRORCODE_SUCCESS);
                 });
     }
+
+    /**
+     * 方法：创建cms菜单
+     * @param serialNo 流水号
+     * @param cmsMenus cms菜单
+     * @return 创建成功的cms菜单
+     */
+    public Flux<CmsMenu> createCmsMenus(String serialNo,
+                                        Flux<CmsMenu> cmsMenus) {
+        return cmsMenus
+                .flatMap(cmsMenu -> {
+                    log.info(Constants.MENU_CMS_OPERATION_SERIAL_NO + serialNo);
+                    log.info(cmsMenu.toString());
+
+                    return this.cmsMenuRepository
+                            .save(cmsMenu);
+        });
+    }
 }
