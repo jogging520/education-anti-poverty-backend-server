@@ -31,7 +31,7 @@ public class Role {
     @NotNull
     private Integer[]               permissions;        //权限
     @NotNull
-    private Date createTime;         //创建时间
+    private Date                    createTime;         //创建时间
     @NotNull
     private Date                    timestamp;          //状态时间
     @NotNull

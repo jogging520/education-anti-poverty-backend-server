@@ -33,19 +33,19 @@ public class PrivilegeService {
      * @param serialNo 流水号
      * @param appType 应用类型
      * @param category 类别（企业）
-     * @param roles 角色
+     * @param ids 角色
      * @return 权限实体数组
      */
-    public Flux<Role> queryRolesByAppType(String serialNo,
-                                          String appType,
-                                          String category,
-                                          String[] roles) {
-        return this.roleRepository.findByIdInAndAppTypesContainingAndCategory(roles,appType,category)
+    public Flux<Role> queryRoles(String serialNo,
+                                 String appType,
+                                 String category,
+                                 String[] ids) {
+        return this.roleRepository.findByIdInAndAppTypesContainingAndCategory(ids, appType, category)
                 .map(role ->{
-                    log.info(Constants.PRIVILEGE_OPERATION_SERIAL_NO+serialNo);
+                    log.info(Constants.PRIVILEGE_OPERATION_SERIAL_NO + serialNo);
                     log.info(role.toString());
 
-                    return role;
+                    return role.setStatus(Constants.PRIVILEGE_ERRORCODE_SUCCESS);
                 });
     }
 
@@ -99,18 +99,19 @@ public class PrivilegeService {
      * 方法：按照ID号查询权限实体信息
      * @param serialNo 流水号
      * @param category 类别（企业）
-     * @param permissions 权限实体编号数组
+     * @param ids 权限实体编号数组
      * @return 权限清单
      */
     public Flux<Permission> queryPermissionsByIds(String serialNo,
                                                   String category,
-                                                  String[] permissions) {
+                                                  String[] ids) {
         return this.permissionRepository
-                .findByIdInAndCategory(permissions, category)
+                .findByIdInAndCategory(ids, category)
                 .map(permission -> {
                     log.info(Constants.PRIVILEGE_OPERATION_SERIAL_NO + serialNo);
                     log.info(permission.toString());
-                    return permission;
+
+                    return permission.setStatus(Constants.PRIVILEGE_ERRORCODE_SUCCESS);
                 });
     }
 }

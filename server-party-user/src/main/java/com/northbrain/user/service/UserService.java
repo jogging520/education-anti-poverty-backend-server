@@ -33,20 +33,19 @@ public class UserService {
      * @param serialNo 流水号
      * @param appType 应用类型
      * @param category 类别（企业）
-     * @param userId 用户编号
+     * @param id 用户编号
      * @return 用户信息
      */
     public Mono<User> queryUserById(String serialNo,
                                     String appType,
                                     String category,
-                                    String userId) {
+                                    String id) {
         return this.userRepository
-                .findById(userId)
+                .findById(id)
                 .filter(user -> user.getCategory().equalsIgnoreCase(category))
                 .filter(user -> user.getStatus().equalsIgnoreCase(Constants.USER_STATUS_ACTIVE))
                 .map(user -> {
                     log.info(Constants.USER_OPERATION_SERIAL_NO + serialNo);
-                    log.info(user.toString());
                     return user
                             .setName(this.crypt.encrypt4UserUpStream(user.getName(), appType))
                             .setPassword(null)

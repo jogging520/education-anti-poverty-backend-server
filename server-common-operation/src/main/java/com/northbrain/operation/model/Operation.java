@@ -33,8 +33,6 @@ public class Operation {
     @Indexed
     private String                      user;               //用户编号
     @NotNull
-    private String                      realName;           //操作者真实姓名
-    @NotNull
     private String                      session;            //会话编号
     @NotNull
     private String                      businessType;       //业务类型
