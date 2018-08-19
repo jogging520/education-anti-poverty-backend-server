@@ -1,10 +1,7 @@
 package com.northbrain.menu.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.northbrain.menu.model.Constants;
 import com.northbrain.menu.model.CmsMenu;
@@ -36,6 +33,31 @@ public class MenuController {
                         .ok()
                         .body(this.menuService
                                 .queryCmsMenus(serialNo));
+
+            default:
+                return ResponseEntity
+                        .ok()
+                        .body(Flux.empty());
+        }
+    }
+
+    /**
+     * 方法：创建cms菜单
+     * @param serialNo 流水号
+     * @param cmsMenus cms菜单
+     * @return 创建成功的cms菜单
+     */
+    @PostMapping(Constants.MENU_SPECIFIED_HTTP_REQUEST_MAPPING)
+    public ResponseEntity<Flux<CmsMenu>> createMenus(@PathVariable String appType,
+                                                     @RequestParam String serialNo,
+                                                     @RequestBody Flux<CmsMenu> cmsMenus) {
+
+        switch (appType) {
+            case Constants.MENU_TYPE_CMS:
+                return ResponseEntity
+                        .ok()
+                        .body(this.menuService
+                                .createCmsMenus(serialNo, cmsMenus));
 
             default:
                 return ResponseEntity

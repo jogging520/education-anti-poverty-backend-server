@@ -48,18 +48,16 @@ public class SessionController {
      * @param appType 应用类型
      * @param category 类别（企业）
      * @param session 会话编号
-     * @param address 客户端IP地址
      * @return 无
      */
     @DeleteMapping(Constants.SESSION_HTTP_REQUEST_MAPPING)
     public ResponseEntity<Mono<Void>> logout(@RequestParam String serialNo,
                                              @RequestParam String appType,
                                              @RequestParam String category,
-                                             @RequestParam String session,
-                                             @RequestParam String address) {
+                                             @RequestParam String session) {
         return ResponseEntity.ok()
                 .body(this.sessionService
-                        .deleteSession(serialNo, session, appType, category, address));
+                        .deleteSession(serialNo, appType, category, session));
     }
 
     /**
