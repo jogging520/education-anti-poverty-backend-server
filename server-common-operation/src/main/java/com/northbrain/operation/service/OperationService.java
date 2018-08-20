@@ -39,9 +39,8 @@ public class OperationService {
         return this.operationRepository.findByCategoryAndStatusAndUser(category, Constants.OPERATION_STATUS_ACTIVE,user)
                 .map(operation -> {
                     log.info(Constants.OPERATION_OPERATION_SERIAL_NO +serialNo);
-                    log.info(operation.toString());
 
-                    return operation;
+                    return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
                 });
     }
 
@@ -60,9 +59,8 @@ public class OperationService {
         return this.operationRepository.findByCategoryAndStatusAndCreateTimeBetween(category,Constants.OPERATION_STATUS_ACTIVE,fromCreateTime,toCreateTime)
                 .map(operation -> {
                     log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
-                    log.info(operation.toString());
 
-                    return operation;
+                    return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
                 });
     }
 
@@ -84,9 +82,8 @@ public class OperationService {
         return this.operationRepository.findByCategoryAndStatusAndUserAndCreateTimeBetween(category,Constants.OPERATION_STATUS_ACTIVE,user,fromCreateTime,toCreateTime)
                 .map(operation -> {
                     log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
-                    log.info(operation.toString());
 
-                    return operation;
+                    return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
                 });
     }
 
@@ -98,7 +95,8 @@ public class OperationService {
      */
     public Mono<Operation> queryOperationById(String serialNo) {
         return this.operationRepository
-                .findById(serialNo);
+                .findById(serialNo)
+                .map(operation -> operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS));
     }
 
     /**
@@ -113,8 +111,8 @@ public class OperationService {
                 .findByCategoryAndStatusAndSerialNo(category, Constants.OPERATION_STATUS_ACTIVE, serialNo)
                 .map(record -> {
                     log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
-                    log.info(record.toString());
-                    return record;
+
+                    return record.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
                 });
     }
 
