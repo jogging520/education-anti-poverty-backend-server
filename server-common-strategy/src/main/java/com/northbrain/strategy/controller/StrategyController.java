@@ -16,33 +16,21 @@ public class StrategyController {
         this.strategyService = strategyService;
     }
     /**
-     * 方法：根据类型查询策略信息
-     * @param type 策略类型
+     * 方法：根据类型查询策略信息     *
      * @param serialNo 流水号
      * @param appType 应用类型
      * @param category 类别（企业）
+     * @param type 策略类型
      * @return 应用程序策略列表
      */
     @GetMapping(Constants.STRATEGY_SPECIFIED_HTTP_REQUEST_MAPPING)
-    public ResponseEntity<Flux<Strategy>> queryStrategies(@PathVariable String type,
-                                                          @RequestParam String serialNo,
-                                                          @RequestParam String appType,
-                                                          @RequestParam String category) {
-        switch (type) {
-            case Constants.STRATEGY_TYPE_APPLICATION:
-                return ResponseEntity.ok()
-                        .body(this.strategyService
-                                .queryApplicationStrategies(serialNo, appType, category));
-
-            case Constants.STRATEGY_TYPE_ERRORCODE:
-                return ResponseEntity.ok()
-                        .body(this.strategyService
-                                .queryErrorCodeStrategies(serialNo, appType, category));
-
-            default:
-                return ResponseEntity.ok()
-                        .body(Flux.empty());
-        }
+    public ResponseEntity<Flux<Strategy>> queryStrategiesByType(@RequestParam String serialNo,
+                                                                @RequestParam String appType,
+                                                                @RequestParam String category,
+                                                                @PathVariable String type) {
+        return ResponseEntity.ok()
+                .body(this.strategyService
+                        .queryStrategiesByType(serialNo, appType, category, type));
     }
 
     /**

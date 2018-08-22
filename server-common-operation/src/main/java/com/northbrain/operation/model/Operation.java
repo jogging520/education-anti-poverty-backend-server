@@ -43,4 +43,5 @@ public class Operation {
     @NotNull
     private String                      status;             //状态
     private String                      description;        //描述
+    private Operation[]                 children;           //子操作
 }

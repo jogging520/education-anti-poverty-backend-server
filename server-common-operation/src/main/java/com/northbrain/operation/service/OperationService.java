@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.Date;
-
 @Service
 @Log
 public class OperationService {
@@ -27,36 +25,43 @@ public class OperationService {
     }
 
     /**
-     * 方法：根据用户查找操作记录
+     * 方法：根据ID、应用类型、企业类型、业务类型、用户和时间段查找操作记录
      * @param serialNo 流水号
+     * @param id 流水号（记录ID）
+     * @param appType 应用类型
      * @param category 类别（企业）
-     * @param user 用户信息
-     * @return 流水记录
-     */
-    public Flux<Operation> queryOperationsByUser(String serialNo,
-                                                 String category,
-                                                 String user) {
-        return this.operationRepository.findByCategoryAndStatusAndUser(category, Constants.OPERATION_STATUS_ACTIVE,user)
-                .map(operation -> {
-                    log.info(Constants.OPERATION_OPERATION_SERIAL_NO +serialNo);
-
-                    return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
-                });
-    }
-
-    /**
-     * 方法：根据时间段查找操作记录
-     * @param serialNo 流水号
-     * @param category 类别（企业）
+     * @param user 用户
+     * @param businessType 业务类型
      * @param fromCreateTime 开始时间
      * @param toCreateTime 结束时间
-     * @return 流水记录
+     * @return 操作记录
      */
-    public Flux<Operation> queryOperationByCreateTime(String serialNo,
-                                                      String category,
-                                                      Date fromCreateTime,
-                                                      Date toCreateTime) {
-        return this.operationRepository.findByCategoryAndStatusAndCreateTimeBetween(category,Constants.OPERATION_STATUS_ACTIVE,fromCreateTime,toCreateTime)
+    public Flux<Operation> queryOperationsByIdAndAppTypeAndBusinessTypeAndUserAndCreateTime(String serialNo,
+                                                                                            String id,
+                                                                                            String appType,
+                                                                                            String category,
+                                                                                            String user,
+                                                                                            String businessType,
+                                                                                            Long fromCreateTime,
+                                                                                            Long toCreateTime) {
+        if(user.equalsIgnoreCase(Constants.OPERATION_QUERY_ALL_USER)) {
+            return this.operationRepository
+                    .findByIdAndAppTypeAndCategoryAndStatusAndBusinessTypeAndCreateTimeBetween(
+                            id, appType, category, Constants.OPERATION_STATUS_ACTIVE,
+                            businessType, Clock.getDate(fromCreateTime),
+                            Clock.getDate(toCreateTime))
+                    .map(operation -> {
+                        log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
+
+                        return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                    });
+        }
+
+        return this.operationRepository
+                .findByIdAndAppTypeAndCategoryAndStatusAndUserAndBusinessTypeAndCreateTimeBetween(
+                        id, appType, category, Constants.OPERATION_STATUS_ACTIVE,
+                        user, businessType, Clock.getDate(fromCreateTime),
+                        Clock.getDate(toCreateTime))
                 .map(operation -> {
                     log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
 
@@ -64,9 +69,133 @@ public class OperationService {
                 });
     }
 
+    /**
+     * 方法：根据企业类型、应用类型、业务类型、用户和时间段查找操作记录
+     * @param serialNo 流水号
+     * @param appType 应用类型
+     * @param category 类别（企业）
+     * @param user 用户
+     * @param businessType 业务类型
+     * @param fromCreateTime 开始时间
+     * @param toCreateTime 结束时间
+     * @return 操作记录
+     */
+    public Flux<Operation> queryOperationsByAppTypeAndBusinessTypeAndUserAndCreateTime(String serialNo,
+                                                                                       String appType,
+                                                                                       String category,
+                                                                                       String user,
+                                                                                       String businessType,
+                                                                                       Long fromCreateTime,
+                                                                                       Long toCreateTime) {
+        if(user.equalsIgnoreCase(Constants.OPERATION_QUERY_ALL_USER)) {
+            return this.operationRepository
+                    .findByAppTypeAndCategoryAndStatusAndBusinessTypeAndCreateTimeBetween(
+                            appType, category, Constants.OPERATION_STATUS_ACTIVE,
+                            businessType, Clock.getDate(fromCreateTime),
+                            Clock.getDate(toCreateTime))
+                    .map(operation -> {
+                        log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
+
+                        return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                    });
+        }
+
+        return this.operationRepository
+                .findByAppTypeAndCategoryAndStatusAndUserAndBusinessTypeAndCreateTimeBetween(
+                        appType, category, Constants.OPERATION_STATUS_ACTIVE,
+                        user, businessType, Clock.getDate(fromCreateTime),
+                        Clock.getDate(toCreateTime))
+                .map(operation -> {
+                    log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
+
+                    return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                });
+    }
 
     /**
-     * 方法：根据用户和时间段查找操作记录
+     * 方法：根据企业类型、业务类型、用户和时间段查找操作记录
+     * @param serialNo 流水号
+     * @param category 类别（企业）
+     * @param user 用户
+     * @param businessType 业务类型
+     * @param fromCreateTime 开始时间
+     * @param toCreateTime 结束时间
+     * @return 操作记录
+     */
+    public Flux<Operation> queryOperationsByBusinessTypeAndUserAndCreateTime(String serialNo,
+                                                                             String category,
+                                                                             String user,
+                                                                             String businessType,
+                                                                             Long fromCreateTime,
+                                                                             Long toCreateTime) {
+        if(user.equalsIgnoreCase(Constants.OPERATION_QUERY_ALL_USER)) {
+            return this.operationRepository
+                    .findByCategoryAndStatusAndBusinessTypeAndCreateTimeBetween(
+                            category, Constants.OPERATION_STATUS_ACTIVE,
+                            businessType, Clock.getDate(fromCreateTime),
+                            Clock.getDate(toCreateTime))
+                    .map(operation -> {
+                        log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
+
+                        return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                    });
+        }
+
+        return this.operationRepository
+                .findByCategoryAndStatusAndUserAndBusinessTypeAndCreateTimeBetween(
+                        category, Constants.OPERATION_STATUS_ACTIVE,
+                        user, businessType, Clock.getDate(fromCreateTime),
+                        Clock.getDate(toCreateTime))
+                .map(operation -> {
+                    log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
+
+                    return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                });
+    }
+
+    /**
+     * 方法：根据企业类型、应用类型、用户和时间段查找操作记录
+     * @param serialNo 流水号
+     * @param appType 应用类型
+     * @param category 类别（企业）
+     * @param user 用户
+     * @param fromCreateTime 开始时间
+     * @param toCreateTime 结束时间
+     * @return 操作记录
+     */
+    public Flux<Operation> queryOperationsByAppTypeAndUserAndCreateTime(String serialNo,
+                                                                        String appType,
+                                                                        String category,
+                                                                        String user,
+                                                                        Long fromCreateTime,
+                                                                        Long toCreateTime) {
+        if(user.equalsIgnoreCase(Constants.OPERATION_QUERY_ALL_USER)) {
+            return this.operationRepository
+                    .findByAppTypeAndCategoryAndStatusAndCreateTimeBetween(
+                            appType, category, Constants.OPERATION_STATUS_ACTIVE,
+                            Clock.getDate(fromCreateTime),
+                            Clock.getDate(toCreateTime))
+                    .map(operation -> {
+                        log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
+
+                        return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                    });
+        }
+
+        return this.operationRepository
+                .findByAppTypeAndCategoryAndStatusAndUserAndCreateTimeBetween(
+                        appType, category, Constants.OPERATION_STATUS_ACTIVE,
+                        user, Clock.getDate(fromCreateTime),
+                        Clock.getDate(toCreateTime))
+                .map(operation -> {
+                    log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
+
+                    return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                });
+    }
+
+    /**
+     * 方法：根据企业类型、业务类型、用户和时间段查找操作记录
      * @param serialNo 流水号
      * @param category 类别（企业）
      * @param user 用户
@@ -74,19 +203,33 @@ public class OperationService {
      * @param toCreateTime 结束时间
      * @return 操作记录
      */
-    public Flux<Operation> queryOperationByUserAndCreateTime(String serialNo,
-                                                             String category,
-                                                             String user,
-                                                             Date fromCreateTime,
-                                                             Date toCreateTime) {
-        return this.operationRepository.findByCategoryAndStatusAndUserAndCreateTimeBetween(category,Constants.OPERATION_STATUS_ACTIVE,user,fromCreateTime,toCreateTime)
+    public Flux<Operation> queryOperationsByUserAndCreateTime(String serialNo,
+                                                              String category,
+                                                              String user,
+                                                              Long fromCreateTime,
+                                                              Long toCreateTime) {
+        if(user.equalsIgnoreCase(Constants.OPERATION_QUERY_ALL_USER)) {
+            return this.operationRepository
+                    .findByCategoryAndStatusAndCreateTimeBetween(
+                            category, Constants.OPERATION_STATUS_ACTIVE,
+                            Clock.getDate(fromCreateTime), Clock.getDate(toCreateTime))
+                    .map(operation -> {
+                        log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
+
+                        return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                    });
+        }
+
+        return this.operationRepository
+                .findByCategoryAndStatusAndUserAndCreateTimeBetween(
+                        category, Constants.OPERATION_STATUS_ACTIVE,
+                        user, Clock.getDate(fromCreateTime), Clock.getDate(toCreateTime))
                 .map(operation -> {
                     log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
 
                     return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
                 });
     }
-
 
     /**
      * 方法：根据ID查询操作记录

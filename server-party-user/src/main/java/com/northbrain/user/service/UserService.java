@@ -11,6 +11,7 @@ import com.northbrain.user.repository.IUserHistoryRepository;
 import com.northbrain.user.repository.IUserRepository;
 
 import lombok.extern.java.Log;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -46,6 +47,31 @@ public class UserService {
                 .filter(user -> user.getStatus().equalsIgnoreCase(Constants.USER_STATUS_ACTIVE))
                 .map(user -> {
                     log.info(Constants.USER_OPERATION_SERIAL_NO + serialNo);
+
+                    return user
+                            .setName(this.crypt.encrypt4UserUpStream(user.getName(), appType))
+                            .setPassword(null)
+                            .setSalt(null)
+                            .setRealName(this.crypt.encrypt4UserUpStream(this.crypt.decrypt4System(user.getRealName()), appType))
+                            .setStatus(Constants.USER_ERRORCODE_SUCCESS);
+                });
+    }
+
+    /**
+     * 方法：查询全部用户信息
+     * @param serialNo 流水号
+     * @param appType 应用类型
+     * @param category 类别（企业）
+     * @return 用户信息
+     */
+    public Flux<User> queryUsers(String serialNo,
+                                 String appType,
+                                 String category) {
+        return this.userRepository
+                .findByCategoryAndStatus(category, Constants.USER_STATUS_ACTIVE)
+                .map(user -> {
+                    log.info(Constants.USER_OPERATION_SERIAL_NO + serialNo);
+
                     return user
                             .setName(this.crypt.encrypt4UserUpStream(user.getName(), appType))
                             .setPassword(null)

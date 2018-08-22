@@ -55,5 +55,12 @@ public class Clock {
         return calendar.getTime();
     }
 
-
+    /**
+     * 方法：根据时间秒数获取时间
+     * @param timeMillis 时间秒数（1970）
+     * @return 转换后的时间
+     */
+    public static Date getDate(Long timeMillis) {
+        return new Date(timeMillis);
+    }
 }
