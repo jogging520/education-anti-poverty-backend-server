@@ -15,9 +15,6 @@ public class Constants {
     public final static String STRATEGY_HISTORY_UPDATE                          =   "UPDATE";   //历史归档：更新
     public final static String STRATEGY_HISTORY_DELETE                          =   "DELETE";   //历史归档：删除
 
-    public final static String STRATEGY_TYPE_APPLICATION                        =   "application";
-    public final static String STRATEGY_TYPE_ERRORCODE                          =   "errorcode";
-
     /**
      * restful资源定义
      */

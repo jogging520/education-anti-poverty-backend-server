@@ -24,38 +24,20 @@ public class StrategyService {
     }
 
     /**
-     * 方法：查询应用程序策略信息
+     * 方法：查询策略信息
      * @param serialNo 流水号
      * @param appType 应用类型
      * @param category 类别（企业）
+     * @param type 策略类型
      * @return 应用程序策略列表
      */
-    public Flux<Strategy> queryApplicationStrategies(String serialNo,
-                                                     String appType,
-                                                     String category) {
+    public Flux<Strategy> queryStrategiesByType(String serialNo,
+                                                String appType,
+                                                String category,
+                                                String type) {
         return this.strategyRepository
-                .findByTypeAndAppTypeAndCategoryAndStatus(Constants.STRATEGY_TYPE_APPLICATION,
-                        appType, category, Constants.STRATEGY_STATUS_ACTIVE)
-                .map(strategy -> {
-                    log.info(Constants.STRATEGY_OPERATION_SERIAL_NO + serialNo);
-                    log.info(strategy.toString());
-                    return strategy.setStatus(Constants.STRATEGY_ERRORCODE_SUCCESS);
-                });
-    }
-
-    /**
-     * 方法：查询错误码策略信息
-     * @param serialNo 流水号
-     * @param appType 应用类型
-     * @param category 类别（企业）
-     * @return 错误码策略列表
-     */
-    public Flux<Strategy> queryErrorCodeStrategies(String serialNo,
-                                                   String appType,
-                                                   String category) {
-        return this.strategyRepository
-                .findByTypeAndAppTypeAndCategoryAndStatus(Constants.STRATEGY_TYPE_ERRORCODE,
-                        appType, category, Constants.STRATEGY_STATUS_ACTIVE)
+                .findByTypeAndAppTypeAndCategoryAndStatus(type, appType,
+                        category, Constants.STRATEGY_STATUS_ACTIVE)
                 .map(strategy -> {
                     log.info(Constants.STRATEGY_OPERATION_SERIAL_NO + serialNo);
                     log.info(strategy.toString());

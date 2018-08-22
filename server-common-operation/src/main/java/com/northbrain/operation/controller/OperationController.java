@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.Date;
-
 @RestController
 public class OperationController {
 
@@ -22,33 +20,55 @@ public class OperationController {
 
     /**
      * 方法：根据各类组合信息查询操作记录
-     * @param serialNo 流水号
+     * @param serialNo 查询流水号
+     * @param id 流水号（记录ID）
+     * @param channelType 渠道类型
      * @param category 类别（企业）
      * @param user 用户信息
+     * @param businessType 业务类型
      * @param fromCreateTime 查询开始时间
      * @param toCreateTime 查询结束时间
      * @return 操作记录
      */
     @GetMapping(Constants.OPERATION_HTTP_REQUEST_MAPPING)
     public ResponseEntity<Flux<Operation>> queryOperations(@RequestParam String serialNo,
+                                                           @RequestParam(required = false) String id,
+                                                           @RequestParam(required = false) String channelType,
                                                            @RequestParam String category,
-                                                           @RequestParam(required = false) String user,
-                                                           @RequestParam(required = false) Date fromCreateTime,
-                                                           @RequestParam(required = false) Date toCreateTime) {
-        if(user != null && fromCreateTime != null && toCreateTime != null)
+                                                           @RequestParam String user,
+                                                           @RequestParam(required = false) String businessType,
+                                                           @RequestParam(required = false) Long fromCreateTime,
+                                                           @RequestParam(required = false) Long toCreateTime) {
+        if(id != null && channelType != null && businessType != null &&
+                fromCreateTime != null && toCreateTime != null)
             return ResponseEntity.ok()
                     .body(this.operationService
-                            .queryOperationByUserAndCreateTime(serialNo, category, user,fromCreateTime, toCreateTime));
+                            .queryOperationsByIdAndAppTypeAndBusinessTypeAndUserAndCreateTime(serialNo, id,
+                                    channelType, category, user, businessType, fromCreateTime, toCreateTime));
 
-        if(user == null && fromCreateTime != null && toCreateTime != null)
+        if(id == null && channelType != null && businessType != null && fromCreateTime != null && toCreateTime != null)
             return ResponseEntity.ok()
                     .body(this.operationService
-                            .queryOperationByCreateTime(serialNo, category, fromCreateTime, toCreateTime));
+                            .queryOperationsByAppTypeAndBusinessTypeAndUserAndCreateTime(serialNo, channelType,
+                                    category, user, businessType, fromCreateTime, toCreateTime));
 
-        if(user != null && fromCreateTime == null && toCreateTime == null)
+        if(id == null && channelType == null && businessType != null && fromCreateTime != null && toCreateTime != null)
             return ResponseEntity.ok()
                     .body(this.operationService
-                            .queryOperationsByUser(serialNo, category, user));
+                            .queryOperationsByBusinessTypeAndUserAndCreateTime(serialNo, category,
+                                    user, businessType, fromCreateTime, toCreateTime));
+
+        if(id == null && channelType != null && businessType == null && fromCreateTime != null && toCreateTime != null)
+            return ResponseEntity.ok()
+                    .body(this.operationService
+                            .queryOperationsByAppTypeAndUserAndCreateTime(serialNo, channelType, category,
+                                    user, fromCreateTime, toCreateTime));
+
+        if(id == null && channelType == null && businessType == null && fromCreateTime != null && toCreateTime != null)
+            return ResponseEntity.ok()
+                    .body(this.operationService
+                            .queryOperationsByUserAndCreateTime(serialNo, category,
+                                    user, fromCreateTime, toCreateTime));
 
         return ResponseEntity.badRequest().body(null);
     }

@@ -5,6 +5,7 @@ public class Constants {
      * 枚举值定义，如状态、类型
      */
     public final static String  OPERATION_STATUS_ACTIVE                         =   "ACTIVE";   //操作记录状态：在用
+    public final static String  OPERATION_QUERY_ALL_USER                        =   "ffffffffffffffffffffffff";   //查询全部用户记录的user编号
 
     /**
      * restful资源定义

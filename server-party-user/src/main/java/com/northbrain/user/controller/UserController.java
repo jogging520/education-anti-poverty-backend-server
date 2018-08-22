@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.northbrain.user.model.Constants;
 
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -73,14 +74,30 @@ public class UserController {
      * @param id 用户编号
      * @return 用户信息
      */
-    @GetMapping(Constants.USER_HTTP_REQUEST_MAPPING)
-    public ResponseEntity<Mono<User>> queryUser(@RequestParam String serialNo,
-                                                @RequestParam String appType,
-                                                @RequestParam String category,
-                                                @RequestParam String id) {
+    @GetMapping(Constants.USER_SPECIFIED_HTTP_REQUEST_MAPPING)
+    public ResponseEntity<Mono<User>> queryUserById(@RequestParam String serialNo,
+                                                    @RequestParam String appType,
+                                                    @RequestParam String category,
+                                                    @PathVariable String id) {
         return ResponseEntity.ok()
                 .body(this.userService
                         .queryUserById(serialNo, appType, category, id));
+    }
+
+    /**
+     * 方法：查询全部用户信息
+     * @param serialNo 流水号
+     * @param appType 应用类型
+     * @param category 类别（企业）
+     * @return 用户信息
+     */
+    @GetMapping(Constants.USER_HTTP_REQUEST_MAPPING)
+    public ResponseEntity<Flux<User>> queryUsers(@RequestParam String serialNo,
+                                                 @RequestParam String appType,
+                                                 @RequestParam String category) {
+        return ResponseEntity.ok()
+                .body(this.userService
+                        .queryUsers(serialNo, appType, category));
     }
 
 }
