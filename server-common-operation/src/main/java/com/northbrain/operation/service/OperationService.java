@@ -53,7 +53,7 @@ public class OperationService {
                     .map(operation -> {
                         log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
 
-                        return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                        return operation;
                     });
         }
 
@@ -65,7 +65,7 @@ public class OperationService {
                 .map(operation -> {
                     log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
 
-                    return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                    return operation;
                 });
     }
 
@@ -96,7 +96,7 @@ public class OperationService {
                     .map(operation -> {
                         log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
 
-                        return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                        return operation;
                     });
         }
 
@@ -108,7 +108,7 @@ public class OperationService {
                 .map(operation -> {
                     log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
 
-                    return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                    return operation;
                 });
     }
 
@@ -137,7 +137,7 @@ public class OperationService {
                     .map(operation -> {
                         log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
 
-                        return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                        return operation;
                     });
         }
 
@@ -149,7 +149,7 @@ public class OperationService {
                 .map(operation -> {
                     log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
 
-                    return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                    return operation;
                 });
     }
 
@@ -178,7 +178,7 @@ public class OperationService {
                     .map(operation -> {
                         log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
 
-                        return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                        return operation;
                     });
         }
 
@@ -190,7 +190,7 @@ public class OperationService {
                 .map(operation -> {
                     log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
 
-                    return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                    return operation;
                 });
     }
 
@@ -216,7 +216,7 @@ public class OperationService {
                     .map(operation -> {
                         log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
 
-                        return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                        return operation;
                     });
         }
 
@@ -227,7 +227,7 @@ public class OperationService {
                 .map(operation -> {
                     log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
 
-                    return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                    return operation;
                 });
     }
 
@@ -239,7 +239,7 @@ public class OperationService {
     public Mono<Operation> queryOperationById(String serialNo) {
         return this.operationRepository
                 .findById(serialNo)
-                .map(operation -> operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS));
+                .map(operation -> operation);
     }
 
     /**
@@ -255,7 +255,7 @@ public class OperationService {
                 .map(record -> {
                     log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
 
-                    return record.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                    return record;
                 });
     }
 

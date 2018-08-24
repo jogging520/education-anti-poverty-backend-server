@@ -41,7 +41,7 @@ public class StrategyService {
                 .map(strategy -> {
                     log.info(Constants.STRATEGY_OPERATION_SERIAL_NO + serialNo);
                     log.info(strategy.toString());
-                    return strategy.setStatus(Constants.STRATEGY_ERRORCODE_SUCCESS);
+                    return strategy;
                 });
     }
 

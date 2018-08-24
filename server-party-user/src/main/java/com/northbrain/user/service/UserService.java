@@ -52,8 +52,7 @@ public class UserService {
                             .setName(this.crypt.encrypt4UserUpStream(user.getName(), appType))
                             .setPassword(null)
                             .setSalt(null)
-                            .setRealName(this.crypt.encrypt4UserUpStream(this.crypt.decrypt4System(user.getRealName()), appType))
-                            .setStatus(Constants.USER_ERRORCODE_SUCCESS);
+                            .setRealName(this.crypt.encrypt4UserUpStream(this.crypt.decrypt4System(user.getRealName()), appType));
                 });
     }
 
@@ -76,8 +75,7 @@ public class UserService {
                             .setName(this.crypt.encrypt4UserUpStream(user.getName(), appType))
                             .setPassword(null)
                             .setSalt(null)
-                            .setRealName(this.crypt.encrypt4UserUpStream(this.crypt.decrypt4System(user.getRealName()), appType))
-                            .setStatus(Constants.USER_ERRORCODE_SUCCESS);
+                            .setRealName(this.crypt.encrypt4UserUpStream(this.crypt.decrypt4System(user.getRealName()), appType));
                 });
     }
 

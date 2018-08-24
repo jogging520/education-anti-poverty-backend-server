@@ -60,6 +60,7 @@ public class Student {
     @NotNull
     private String              status;                         //状态
     @NotNull
+    @Indexed
     private String              serialNo;                       //操作流水号
     private String              description;                    //描述
 }
