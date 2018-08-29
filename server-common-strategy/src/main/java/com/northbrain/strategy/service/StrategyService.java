@@ -28,15 +28,15 @@ public class StrategyService {
      * @param serialNo 流水号
      * @param appType 应用类型
      * @param category 类别（企业）
-     * @param type 策略类型
+     * @param types 策略类型
      * @return 应用程序策略列表
      */
     public Flux<Strategy> queryStrategiesByType(String serialNo,
                                                 String appType,
                                                 String category,
-                                                String type) {
+                                                String[] types) {
         return this.strategyRepository
-                .findByTypeAndAppTypeAndCategoryAndStatus(type, appType,
+                .findByTypeInAndAppTypeAndCategoryAndStatus(types, appType,
                         category, Constants.STRATEGY_STATUS_ACTIVE)
                 .map(strategy -> {
                     log.info(Constants.STRATEGY_OPERATION_SERIAL_NO + serialNo);

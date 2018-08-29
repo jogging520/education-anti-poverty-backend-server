@@ -7,8 +7,8 @@ import reactor.core.publisher.Flux;
 
 public interface IStrategyRepository extends ReactiveCrudRepository<Strategy, String> {
 
-     Flux<Strategy> findByTypeAndAppTypeAndCategoryAndStatus(String type,
-                                                             String appTYpe,
-                                                             String category,
-                                                             String status);
+     Flux<Strategy> findByTypeInAndAppTypeAndCategoryAndStatus(String[] types,
+                                                               String appTYpe,
+                                                               String category,
+                                                               String status);
 }

@@ -177,6 +177,7 @@ public class UserService {
         String salt = Password.generateSalt();
         log.info(user.toString());
 
+        //TODO mobiles、emails、wechats都要进行加密。
         return this.userRepository
                 .findByCategoryAndStatusAndIdOrName(category, Constants.USER_STATUS_ACTIVE,
                         user.getId(), this.crypt.decrypt4UserDownStream(user.getName(), appType, false))

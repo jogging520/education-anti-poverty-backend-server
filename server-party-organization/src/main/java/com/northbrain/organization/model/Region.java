@@ -35,7 +35,6 @@ public class Region {
     private Float               longitude;                      //中心经度
     @NotNull
     private Float               latitude;                       //中心纬度
-    //private 地理位置信息 TODO
     @NotNull
     private Date                createTime;                     //创建时间
     @NotNull
