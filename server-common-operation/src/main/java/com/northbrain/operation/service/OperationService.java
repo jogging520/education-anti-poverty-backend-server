@@ -46,7 +46,7 @@ public class OperationService {
                                                                                             Long toCreateTime) {
         if(user.equalsIgnoreCase(Constants.OPERATION_QUERY_ALL_USER)) {
             return this.operationRepository
-                    .findByIdAndAppTypeAndCategoryAndStatusAndBusinessTypeAndCreateTimeBetween(
+                    .findByIdAndAppTypeAndCategoryAndStatusAndBusinessTypeAndCreateTimeBetweenOrderByCreateTimeDesc(
                             id, appType, category, Constants.OPERATION_STATUS_ACTIVE,
                             businessType, Clock.getDate(fromCreateTime),
                             Clock.getDate(toCreateTime))
@@ -58,7 +58,7 @@ public class OperationService {
         }
 
         return this.operationRepository
-                .findByIdAndAppTypeAndCategoryAndStatusAndUserAndBusinessTypeAndCreateTimeBetween(
+                .findByIdAndAppTypeAndCategoryAndStatusAndUserAndBusinessTypeAndCreateTimeBetweenOrderByCreateTimeDesc(
                         id, appType, category, Constants.OPERATION_STATUS_ACTIVE,
                         user, businessType, Clock.getDate(fromCreateTime),
                         Clock.getDate(toCreateTime))
@@ -89,7 +89,7 @@ public class OperationService {
                                                                                        Long toCreateTime) {
         if(user.equalsIgnoreCase(Constants.OPERATION_QUERY_ALL_USER)) {
             return this.operationRepository
-                    .findByAppTypeAndCategoryAndStatusAndBusinessTypeAndCreateTimeBetween(
+                    .findByAppTypeAndCategoryAndStatusAndBusinessTypeAndCreateTimeBetweenOrderByCreateTimeDesc(
                             appType, category, Constants.OPERATION_STATUS_ACTIVE,
                             businessType, Clock.getDate(fromCreateTime),
                             Clock.getDate(toCreateTime))
@@ -101,7 +101,7 @@ public class OperationService {
         }
 
         return this.operationRepository
-                .findByAppTypeAndCategoryAndStatusAndUserAndBusinessTypeAndCreateTimeBetween(
+                .findByAppTypeAndCategoryAndStatusAndUserAndBusinessTypeAndCreateTimeBetweenOrderByCreateTimeDesc(
                         appType, category, Constants.OPERATION_STATUS_ACTIVE,
                         user, businessType, Clock.getDate(fromCreateTime),
                         Clock.getDate(toCreateTime))
@@ -130,7 +130,7 @@ public class OperationService {
                                                                              Long toCreateTime) {
         if(user.equalsIgnoreCase(Constants.OPERATION_QUERY_ALL_USER)) {
             return this.operationRepository
-                    .findByCategoryAndStatusAndBusinessTypeAndCreateTimeBetween(
+                    .findByCategoryAndStatusAndBusinessTypeAndCreateTimeBetweenOrderByCreateTimeDesc(
                             category, Constants.OPERATION_STATUS_ACTIVE,
                             businessType, Clock.getDate(fromCreateTime),
                             Clock.getDate(toCreateTime))
@@ -142,7 +142,7 @@ public class OperationService {
         }
 
         return this.operationRepository
-                .findByCategoryAndStatusAndUserAndBusinessTypeAndCreateTimeBetween(
+                .findByCategoryAndStatusAndUserAndBusinessTypeAndCreateTimeBetweenOrderByCreateTimeDesc(
                         category, Constants.OPERATION_STATUS_ACTIVE,
                         user, businessType, Clock.getDate(fromCreateTime),
                         Clock.getDate(toCreateTime))
@@ -171,7 +171,7 @@ public class OperationService {
                                                                         Long toCreateTime) {
         if(user.equalsIgnoreCase(Constants.OPERATION_QUERY_ALL_USER)) {
             return this.operationRepository
-                    .findByAppTypeAndCategoryAndStatusAndCreateTimeBetween(
+                    .findByAppTypeAndCategoryAndStatusAndCreateTimeBetweenOrderByCreateTimeDesc(
                             appType, category, Constants.OPERATION_STATUS_ACTIVE,
                             Clock.getDate(fromCreateTime),
                             Clock.getDate(toCreateTime))
@@ -183,7 +183,7 @@ public class OperationService {
         }
 
         return this.operationRepository
-                .findByAppTypeAndCategoryAndStatusAndUserAndCreateTimeBetween(
+                .findByAppTypeAndCategoryAndStatusAndUserAndCreateTimeBetweenOrderByCreateTimeDesc(
                         appType, category, Constants.OPERATION_STATUS_ACTIVE,
                         user, Clock.getDate(fromCreateTime),
                         Clock.getDate(toCreateTime))
@@ -210,7 +210,7 @@ public class OperationService {
                                                               Long toCreateTime) {
         if(user.equalsIgnoreCase(Constants.OPERATION_QUERY_ALL_USER)) {
             return this.operationRepository
-                    .findByCategoryAndStatusAndCreateTimeBetween(
+                    .findByCategoryAndStatusAndCreateTimeBetweenOrderByCreateTimeDesc(
                             category, Constants.OPERATION_STATUS_ACTIVE,
                             Clock.getDate(fromCreateTime), Clock.getDate(toCreateTime))
                     .map(operation -> {
@@ -221,7 +221,7 @@ public class OperationService {
         }
 
         return this.operationRepository
-                .findByCategoryAndStatusAndUserAndCreateTimeBetween(
+                .findByCategoryAndStatusAndUserAndCreateTimeBetweenOrderByCreateTimeDesc(
                         category, Constants.OPERATION_STATUS_ACTIVE,
                         user, Clock.getDate(fromCreateTime), Clock.getDate(toCreateTime))
                 .map(operation -> {
