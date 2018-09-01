@@ -45,7 +45,7 @@ public class PrivilegeService {
                     log.info(Constants.PRIVILEGE_OPERATION_SERIAL_NO + serialNo);
                     log.info(role.toString());
 
-                    return role.setStatus(Constants.PRIVILEGE_ERRORCODE_SUCCESS);
+                    return role;
                 });
     }
 
@@ -111,7 +111,7 @@ public class PrivilegeService {
                     log.info(Constants.PRIVILEGE_OPERATION_SERIAL_NO + serialNo);
                     log.info(permission.toString());
 
-                    return permission.setStatus(Constants.PRIVILEGE_ERRORCODE_SUCCESS);
+                    return permission;
                 });
     }
 }

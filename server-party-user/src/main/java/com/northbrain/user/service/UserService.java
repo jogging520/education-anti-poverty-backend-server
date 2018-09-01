@@ -52,8 +52,7 @@ public class UserService {
                             .setName(this.crypt.encrypt4UserUpStream(user.getName(), appType))
                             .setPassword(null)
                             .setSalt(null)
-                            .setRealName(this.crypt.encrypt4UserUpStream(this.crypt.decrypt4System(user.getRealName()), appType))
-                            .setStatus(Constants.USER_ERRORCODE_SUCCESS);
+                            .setRealName(this.crypt.encrypt4UserUpStream(this.crypt.decrypt4System(user.getRealName()), appType));
                 });
     }
 
@@ -76,8 +75,7 @@ public class UserService {
                             .setName(this.crypt.encrypt4UserUpStream(user.getName(), appType))
                             .setPassword(null)
                             .setSalt(null)
-                            .setRealName(this.crypt.encrypt4UserUpStream(this.crypt.decrypt4System(user.getRealName()), appType))
-                            .setStatus(Constants.USER_ERRORCODE_SUCCESS);
+                            .setRealName(this.crypt.encrypt4UserUpStream(this.crypt.decrypt4System(user.getRealName()), appType));
                 });
     }
 
@@ -179,6 +177,7 @@ public class UserService {
         String salt = Password.generateSalt();
         log.info(user.toString());
 
+        //TODO mobiles、emails、wechats都要进行加密。
         return this.userRepository
                 .findByCategoryAndStatusAndIdOrName(category, Constants.USER_STATUS_ACTIVE,
                         user.getId(), this.crypt.decrypt4UserDownStream(user.getName(), appType, false))

@@ -46,26 +46,26 @@ public class OperationService {
                                                                                             Long toCreateTime) {
         if(user.equalsIgnoreCase(Constants.OPERATION_QUERY_ALL_USER)) {
             return this.operationRepository
-                    .findByIdAndAppTypeAndCategoryAndStatusAndBusinessTypeAndCreateTimeBetween(
+                    .findByIdAndAppTypeAndCategoryAndStatusAndBusinessTypeAndCreateTimeBetweenOrderByCreateTimeDesc(
                             id, appType, category, Constants.OPERATION_STATUS_ACTIVE,
                             businessType, Clock.getDate(fromCreateTime),
                             Clock.getDate(toCreateTime))
                     .map(operation -> {
                         log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
 
-                        return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                        return operation;
                     });
         }
 
         return this.operationRepository
-                .findByIdAndAppTypeAndCategoryAndStatusAndUserAndBusinessTypeAndCreateTimeBetween(
+                .findByIdAndAppTypeAndCategoryAndStatusAndUserAndBusinessTypeAndCreateTimeBetweenOrderByCreateTimeDesc(
                         id, appType, category, Constants.OPERATION_STATUS_ACTIVE,
                         user, businessType, Clock.getDate(fromCreateTime),
                         Clock.getDate(toCreateTime))
                 .map(operation -> {
                     log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
 
-                    return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                    return operation;
                 });
     }
 
@@ -89,26 +89,26 @@ public class OperationService {
                                                                                        Long toCreateTime) {
         if(user.equalsIgnoreCase(Constants.OPERATION_QUERY_ALL_USER)) {
             return this.operationRepository
-                    .findByAppTypeAndCategoryAndStatusAndBusinessTypeAndCreateTimeBetween(
+                    .findByAppTypeAndCategoryAndStatusAndBusinessTypeAndCreateTimeBetweenOrderByCreateTimeDesc(
                             appType, category, Constants.OPERATION_STATUS_ACTIVE,
                             businessType, Clock.getDate(fromCreateTime),
                             Clock.getDate(toCreateTime))
                     .map(operation -> {
                         log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
 
-                        return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                        return operation;
                     });
         }
 
         return this.operationRepository
-                .findByAppTypeAndCategoryAndStatusAndUserAndBusinessTypeAndCreateTimeBetween(
+                .findByAppTypeAndCategoryAndStatusAndUserAndBusinessTypeAndCreateTimeBetweenOrderByCreateTimeDesc(
                         appType, category, Constants.OPERATION_STATUS_ACTIVE,
                         user, businessType, Clock.getDate(fromCreateTime),
                         Clock.getDate(toCreateTime))
                 .map(operation -> {
                     log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
 
-                    return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                    return operation;
                 });
     }
 
@@ -130,26 +130,26 @@ public class OperationService {
                                                                              Long toCreateTime) {
         if(user.equalsIgnoreCase(Constants.OPERATION_QUERY_ALL_USER)) {
             return this.operationRepository
-                    .findByCategoryAndStatusAndBusinessTypeAndCreateTimeBetween(
+                    .findByCategoryAndStatusAndBusinessTypeAndCreateTimeBetweenOrderByCreateTimeDesc(
                             category, Constants.OPERATION_STATUS_ACTIVE,
                             businessType, Clock.getDate(fromCreateTime),
                             Clock.getDate(toCreateTime))
                     .map(operation -> {
                         log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
 
-                        return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                        return operation;
                     });
         }
 
         return this.operationRepository
-                .findByCategoryAndStatusAndUserAndBusinessTypeAndCreateTimeBetween(
+                .findByCategoryAndStatusAndUserAndBusinessTypeAndCreateTimeBetweenOrderByCreateTimeDesc(
                         category, Constants.OPERATION_STATUS_ACTIVE,
                         user, businessType, Clock.getDate(fromCreateTime),
                         Clock.getDate(toCreateTime))
                 .map(operation -> {
                     log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
 
-                    return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                    return operation;
                 });
     }
 
@@ -171,26 +171,26 @@ public class OperationService {
                                                                         Long toCreateTime) {
         if(user.equalsIgnoreCase(Constants.OPERATION_QUERY_ALL_USER)) {
             return this.operationRepository
-                    .findByAppTypeAndCategoryAndStatusAndCreateTimeBetween(
+                    .findByAppTypeAndCategoryAndStatusAndCreateTimeBetweenOrderByCreateTimeDesc(
                             appType, category, Constants.OPERATION_STATUS_ACTIVE,
                             Clock.getDate(fromCreateTime),
                             Clock.getDate(toCreateTime))
                     .map(operation -> {
                         log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
 
-                        return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                        return operation;
                     });
         }
 
         return this.operationRepository
-                .findByAppTypeAndCategoryAndStatusAndUserAndCreateTimeBetween(
+                .findByAppTypeAndCategoryAndStatusAndUserAndCreateTimeBetweenOrderByCreateTimeDesc(
                         appType, category, Constants.OPERATION_STATUS_ACTIVE,
                         user, Clock.getDate(fromCreateTime),
                         Clock.getDate(toCreateTime))
                 .map(operation -> {
                     log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
 
-                    return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                    return operation;
                 });
     }
 
@@ -210,24 +210,24 @@ public class OperationService {
                                                               Long toCreateTime) {
         if(user.equalsIgnoreCase(Constants.OPERATION_QUERY_ALL_USER)) {
             return this.operationRepository
-                    .findByCategoryAndStatusAndCreateTimeBetween(
+                    .findByCategoryAndStatusAndCreateTimeBetweenOrderByCreateTimeDesc(
                             category, Constants.OPERATION_STATUS_ACTIVE,
                             Clock.getDate(fromCreateTime), Clock.getDate(toCreateTime))
                     .map(operation -> {
                         log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
 
-                        return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                        return operation;
                     });
         }
 
         return this.operationRepository
-                .findByCategoryAndStatusAndUserAndCreateTimeBetween(
+                .findByCategoryAndStatusAndUserAndCreateTimeBetweenOrderByCreateTimeDesc(
                         category, Constants.OPERATION_STATUS_ACTIVE,
                         user, Clock.getDate(fromCreateTime), Clock.getDate(toCreateTime))
                 .map(operation -> {
                     log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
 
-                    return operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                    return operation;
                 });
     }
 
@@ -239,7 +239,7 @@ public class OperationService {
     public Mono<Operation> queryOperationById(String serialNo) {
         return this.operationRepository
                 .findById(serialNo)
-                .map(operation -> operation.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS));
+                .map(operation -> operation);
     }
 
     /**
@@ -255,7 +255,7 @@ public class OperationService {
                 .map(record -> {
                     log.info(Constants.OPERATION_OPERATION_SERIAL_NO + serialNo);
 
-                    return record.setStatus(Constants.OPERATION_ERRORCODE_SUCCESS);
+                    return record;
                 });
     }
 

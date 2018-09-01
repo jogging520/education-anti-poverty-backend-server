@@ -15,22 +15,23 @@ public class StrategyController {
     public StrategyController(StrategyService strategyService) {
         this.strategyService = strategyService;
     }
+
     /**
-     * 方法：根据类型查询策略信息     *
+     * 方法：根据类型查询策略信息
      * @param serialNo 流水号
      * @param appType 应用类型
      * @param category 类别（企业）
-     * @param type 策略类型
+     * @param types 策略类型
      * @return 应用程序策略列表
      */
-    @GetMapping(Constants.STRATEGY_SPECIFIED_HTTP_REQUEST_MAPPING)
+    @GetMapping(Constants.STRATEGY_HTTP_REQUEST_MAPPING)
     public ResponseEntity<Flux<Strategy>> queryStrategiesByType(@RequestParam String serialNo,
                                                                 @RequestParam String appType,
                                                                 @RequestParam String category,
-                                                                @PathVariable String type) {
+                                                                @RequestParam String[] types) {
         return ResponseEntity.ok()
                 .body(this.strategyService
-                        .queryStrategiesByType(serialNo, appType, category, type));
+                        .queryStrategiesByType(serialNo, appType, category, types));
     }
 
     /**

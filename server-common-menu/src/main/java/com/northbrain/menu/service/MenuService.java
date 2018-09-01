@@ -30,7 +30,7 @@ public class MenuService {
                     log.info(Constants.MENU_CMS_OPERATION_SERIAL_NO + serialNo);
                     log.info(cmsMenu.toString());
 
-                    return cmsMenu.setStatus(Constants.MENU_ERRORCODE_SUCCESS);
+                    return cmsMenu;
                 });
     }
 
