@@ -67,34 +67,32 @@ public class UserController {
     }
 
     /**
-     * 方法：根据ID号查找用户信息
-     * @param serialNo 流水号
-     * @param appType 应用类型
-     * @param category 类别（企业）
-     * @param id 用户编号
-     * @return 用户信息
-     */
-    @GetMapping(Constants.USER_SPECIFIED_HTTP_REQUEST_MAPPING)
-    public ResponseEntity<Mono<User>> queryUserById(@RequestParam String serialNo,
-                                                    @RequestParam String appType,
-                                                    @RequestParam String category,
-                                                    @PathVariable String id) {
-        return ResponseEntity.ok()
-                .body(this.userService
-                        .queryUserById(serialNo, appType, category, id));
-    }
-
-    /**
      * 方法：查询全部用户信息
      * @param serialNo 流水号
      * @param appType 应用类型
      * @param category 类别（企业）
+     * @param id 用户编号
+     * @param name 用户名称
      * @return 用户信息
      */
     @GetMapping(Constants.USER_HTTP_REQUEST_MAPPING)
     public ResponseEntity<Flux<User>> queryUsers(@RequestParam String serialNo,
                                                  @RequestParam String appType,
-                                                 @RequestParam String category) {
+                                                 @RequestParam String category,
+                                                 @RequestParam(required = false) String id,
+                                                 @RequestParam(required = false) String name) {
+        if(id != null) {
+            return ResponseEntity.ok()
+                    .body(this.userService
+                            .queryUserById(serialNo, appType, category, id).flux());
+        }
+
+        if(name != null) {
+            return ResponseEntity.ok()
+                    .body(this.userService
+                            .queryUserByName(serialNo, appType, category, name).flux());
+        }
+
         return ResponseEntity.ok()
                 .body(this.userService
                         .queryUsers(serialNo, appType, category));
