@@ -10,6 +10,9 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
@@ -414,5 +417,35 @@ public class Crypt {
         return new String(Base64.getDecoder()
                 .decode(decrypt(data.getBytes(),
                         securityProperty.getSysPrivateKey())));
+    }
+
+    /**
+     * 方法：编码url中某属性
+     * @param data 属性数据
+     * @return 编码后的值
+     */
+    public String urlEecode(String data) {
+        try {
+            return URLEncoder.encode(data, Constants.UTIL_SECURITY_URL_CODER_CHARSET);
+        } catch (UnsupportedEncodingException e) {
+            StackTracer.printException(e);
+        }
+
+        return null;
+    }
+
+    /**
+     * 方法：解码url中某属性
+     * @param data 属性数据
+     * @return 解码后的值
+     */
+    public String urlDecode(String data) {
+        try {
+            return URLDecoder.decode(data, Constants.UTIL_SECURITY_URL_CODER_CHARSET);
+        } catch (UnsupportedEncodingException e) {
+            StackTracer.printException(e);
+        }
+
+        return null;
     }
 }

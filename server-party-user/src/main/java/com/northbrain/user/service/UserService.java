@@ -57,6 +57,34 @@ public class UserService {
     }
 
     /**
+     * 方法：根据名称查找用户信息
+     * @param serialNo 流水号
+     * @param appType 应用类型
+     * @param category 类别（企业）
+     * @param name 用户名称
+     * @return 用户信息
+     */
+    public Mono<User> queryUserByName(String serialNo,
+                                      String appType,
+                                      String category,
+                                      String name) {
+        return this.userRepository
+                .findByCategoryAndStatusAndName(category, Constants.USER_STATUS_ACTIVE,
+                        this.crypt.decrypt4UserDownStream(this.crypt.urlDecode(name),
+                                appType, false))
+                .map(user -> {
+                    log.info(Constants.USER_OPERATION_SERIAL_NO + serialNo);
+
+                    return user
+                            .setName(this.crypt.encrypt4UserUpStream(user.getName(), appType))
+                            .setPassword(null)
+                            .setSalt(null)
+                            .setRealName(null);
+                });
+    }
+
+
+    /**
      * 方法：查询全部用户信息
      * @param serialNo 流水号
      * @param appType 应用类型
