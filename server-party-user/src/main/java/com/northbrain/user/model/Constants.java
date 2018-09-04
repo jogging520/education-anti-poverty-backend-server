@@ -18,8 +18,9 @@ public class Constants {
     /**
      * restful资源定义
      */
-    public final static String  USER_HTTP_REQUEST_MAPPING                   =   "/users";
-    public final static String  USER_AUTHENTICATION_HTTP_REQUEST_MAPPING    =   "/authentication";   //用户rest资源
+    public final static String  USER_HTTP_REQUEST_MAPPING                   =   "/users";//用户rest资源
+    public final static String  USER_HTTP_SPECIFIED_REQUEST_MAPPING         =   "/users/{id}";          //指定用户id的rest资源
+    public final static String  USER_AUTHENTICATION_HTTP_REQUEST_MAPPING    =   "/authentication";   //鉴权rest资源
 
     /**
      * 操作定义

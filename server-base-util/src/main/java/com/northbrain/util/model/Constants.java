@@ -72,4 +72,6 @@ public class Constants {
     public final static int    UTIL_SECURITY_PBKDF2_HASH_BIT_SIZE       =   128*4;                                      //生成密文的长度
     public final static int    UTIL_SECURITY_PBKDF2_ITERATIONS          =   1000;                                       //迭代次数
     public final static int    UTIL_SECURITY_MAX_DECRYPT_BLOCK          =   128;
+    public final static String UTIL_SECURITY_URL_CODER_CHARSET          =   "UTF-8";                                    //URL串编解码的字符集
+
 }

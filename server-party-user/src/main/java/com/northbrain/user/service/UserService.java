@@ -70,7 +70,8 @@ public class UserService {
                                       String name) {
         return this.userRepository
                 .findByCategoryAndStatusAndName(category, Constants.USER_STATUS_ACTIVE,
-                        this.crypt.decrypt4UserDownStream(name, appType, false))
+                        this.crypt.decrypt4UserDownStream(this.crypt.urlDecode(name),
+                                appType, false))
                 .map(user -> {
                     log.info(Constants.USER_OPERATION_SERIAL_NO + serialNo);
 
