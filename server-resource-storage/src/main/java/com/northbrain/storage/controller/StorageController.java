@@ -3,15 +3,14 @@ package com.northbrain.storage.controller;
 import com.northbrain.storage.model.Constants;
 import com.northbrain.storage.model.Storage;
 import com.northbrain.storage.service.StorageService;
+import lombok.extern.java.Log;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Mono;
 
 @RestController
+@Log
 public class StorageController {
     private final StorageService storageService;
 
@@ -27,11 +26,16 @@ public class StorageController {
      * @param multipartFile 文件
      * @return 存储成功的文件名（全名）
      */
-    @PostMapping(Constants.STORAGE_HTTP_REQUEST_MAPPING)
+    @PostMapping(value = Constants.STORAGE_HTTP_REQUEST_MAPPING, consumes = {"multipart/form-data", "application/json"})
     public ResponseEntity<Mono<Storage>> uploadFile(@RequestParam String serialNo,
                                                     @RequestParam String type,
                                                     @RequestParam String category,
-                                                    @RequestParam MultipartFile multipartFile) {
+                                                    @RequestBody MultipartFile multipartFile) {
+        log.info("----------");
+        log.info(serialNo);
+        log.info(type);
+        log.info(category);
+        log.info(multipartFile.getContentType());
         return ResponseEntity.ok()
                 .body(this.storageService
                         .createFile(serialNo, type, category, multipartFile));
