@@ -12,12 +12,12 @@ import com.northbrain.util.timer.Clock;
 import com.northbrain.util.tracer.StackTracer;
 import lombok.extern.java.Log;
 import org.apache.commons.io.FilenameUtils;
+import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.Charset;
 
 @Service
@@ -40,39 +40,43 @@ public class StorageService {
      * @param serialNo 流水号
      * @param type 文件类型
      * @param category 类别（企业）
-     * @param multipartFile 文件
      * @return 存储成功的文件名（全名）
      */
-    public Mono<Storage> createFile(String serialNo,
+    public Flux<Storage> createFile(String serialNo,
                                     String type,
                                     String category,
-                                    MultipartFile multipartFile) {
-        try {
-            log.info(Constants.STORAGE_OPERATION_SERIAL_NO + serialNo);
+                                    Flux<FilePart> fileParts) {
+        return fileParts
+                .flatMap(filePart -> {
+                    File transferredFile = new File(filePart.filename());
+                    filePart.transferTo(transferredFile)
+                     .subscribe();
 
-            StorePath storePath = this.fastFileStorageClient
-                    .uploadFile(multipartFile.getInputStream(), multipartFile.getSize(),
-                            FilenameUtils.getExtension(multipartFile.getOriginalFilename()), null);
+                    StorePath storePath;
+                    try {
+                        storePath = this.fastFileStorageClient.uploadFile(
+                                new FileInputStream(transferredFile), transferredFile.length(),
+                                FilenameUtils.getExtension(transferredFile.getName()), null);
+                    } catch (FileNotFoundException e) {
+                        StackTracer.printException(e);
+                        return Mono.just(Storage.builder()
+                                .status(Constants.STORAGE_ERRORCODE_STORE_FAILURE)
+                                .build()).flux();
+                    }
 
-            return this.storageRepository
-                    .save(Storage.builder()
-                            .type(type)
-                            .name(storePath.getFullPath())
-                            .category(category)
-                            .createTime(Clock.currentTime())
-                            .timestamp(Clock.currentTime())
-                            .status(Constants.STORAGE_STATUS_ACTIVE)
-                            .serialNo(serialNo)
-                            .description(Constants.STORAGE_AUTO_DESCRIPTION)
-                            .build())
+                    return this.storageRepository
+                            .save(Storage.builder()
+                                    .type(type)
+                                    .name(storePath.getFullPath())
+                                    .category(category)
+                                    .createTime(Clock.currentTime())
+                                    .timestamp(Clock.currentTime())
+                                    .status(Constants.STORAGE_STATUS_ACTIVE)
+                                    .serialNo(serialNo)
+                                    .description(Constants.STORAGE_AUTO_DESCRIPTION)
+                                    .build())
                     .map(storage -> storage.setStatus(Constants.STORAGE_ERRORCODE_SUCCESS));
-        } catch (IOException e) {
-            StackTracer.printException(e);
-        }
-
-        return Mono.just(Storage.builder()
-                .status(Constants.STORAGE_ERRORCODE_STORE_FAILURE)
-                .build());
+                });
     }
 
     /**

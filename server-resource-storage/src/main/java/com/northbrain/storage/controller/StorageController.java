@@ -4,11 +4,9 @@ import com.northbrain.storage.model.Constants;
 import com.northbrain.storage.model.Storage;
 import com.northbrain.storage.service.StorageService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.codec.multipart.FilePart;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -22,19 +20,19 @@ public class StorageController {
     /**
      * 方法：上传图片至存储服务端
      * @param serialNo 流水号
-     * @param type 文件类型
+     * @param type 类型
      * @param category 类别（企业）
-     * @param multipartFile 文件
+     * @param fileParts 文件（图片）
      * @return 存储成功的文件名（全名）
      */
-    @PostMapping(Constants.STORAGE_HTTP_REQUEST_MAPPING)
-    public ResponseEntity<Mono<Storage>> uploadFile(@RequestParam String serialNo,
+    @PostMapping(value = Constants.STORAGE_HTTP_REQUEST_MAPPING)
+    public ResponseEntity<Flux<Storage>> uploadFile(@RequestParam String serialNo,
                                                     @RequestParam String type,
                                                     @RequestParam String category,
-                                                    @RequestParam MultipartFile multipartFile) {
+                                                    @RequestPart(Constants.STORAGE_FILE_ATTRIBUTE_NAME) Flux<FilePart> fileParts) {
         return ResponseEntity.ok()
                 .body(this.storageService
-                        .createFile(serialNo, type, category, multipartFile));
+                        .createFile(serialNo, type, category, fileParts));
     }
 
     /**

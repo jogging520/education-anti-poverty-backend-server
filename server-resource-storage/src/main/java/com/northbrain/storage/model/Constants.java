@@ -11,6 +11,8 @@ public class Constants {
 
     public final static String  STORAGE_CONTENT_CHARSET                         =   "UTF-8";   //字符集
     public final static String  STORAGE_AUTO_DESCRIPTION                        =   "nb auto.";  //自动填写description
+
+    public final static String  STORAGE_FILE_ATTRIBUTE_NAME                     =   "file";  //上传文件属性的名称
     /**
      * restful资源定义
      */
