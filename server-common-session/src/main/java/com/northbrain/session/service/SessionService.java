@@ -72,8 +72,8 @@ public class SessionService {
         }
 
         return this.sessionRepository
-                .findByAppTypeAndCategoryAndStatusAndUserName(appType, category,
-                        Constants.SESSION_STATUS_LOGIN, decryptedUserName)
+                .findTop1ByAppTypeAndCategoryAndStatusAndUserNameOOrderByCreateTimeDesc(
+                        appType, category, Constants.SESSION_STATUS_LOGIN, decryptedUserName)
                 .switchIfEmpty(
                         this.sessionRepository.save(Session
                                 .builder()
