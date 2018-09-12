@@ -7,6 +7,7 @@ import com.northbrain.session.service.SessionService;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 
@@ -59,6 +60,27 @@ public class SessionController {
                 .body(this.sessionService
                         .deleteSession(serialNo, appType, category, session));
     }
+
+    /**
+     * 方法：删除会话，并移入历史库
+     * @param serialNo 流水号
+     * @param appType 应用类型
+     * @param category 类别（企业）
+     * @param user 用户编号
+     * @param session 会话编号
+     * @return 更换后的token
+     */
+    @PutMapping(Constants.SESSION_HTTP_REQUEST_MAPPING)
+    public ResponseEntity<Mono<Token>> updateSession(@RequestParam String serialNo,
+                                                     @RequestParam String appType,
+                                                     @RequestParam String category,
+                                                     @RequestParam String user,
+                                                     @RequestParam String session) {
+        return ResponseEntity.ok()
+                .body(this.sessionService
+                        .updateSession(serialNo, appType, category, user, session));
+    }
+
 
     /**
      * 方法：校验JWT的有效性
@@ -125,7 +147,7 @@ public class SessionController {
      * @return 空
      */
     @DeleteMapping(Constants.SESSION_ATTEMPT_HTTP_REQUEST_MAPPING)
-    public ResponseEntity<Mono<Void>> deleteAttempts(@RequestParam String serialNo,
+    public ResponseEntity<Flux<Void>> deleteAttempts(@RequestParam String serialNo,
                                                      @RequestParam String userName,
                                                      @RequestParam String appType,
                                                      @RequestParam String category) {

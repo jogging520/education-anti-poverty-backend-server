@@ -13,6 +13,7 @@ import com.northbrain.util.tracer.StackTracer;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.java.Log;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.Map;
@@ -143,15 +144,15 @@ public class SessionService {
                                     String appType,
                                     String category,
                                     String session) {
-        this.sessionRepository
+        return this.sessionRepository
                 .findById(session)
                 .filter(newSession -> newSession.getAppType().equalsIgnoreCase(appType))
                 .filter(newSession -> newSession.getCategory().equalsIgnoreCase(category))
-                .subscribe(newSession -> {
+                .flatMap(newSession -> {
                     log.info(Constants.SESSION_OPERATION_SERIAL_NO + serialNo);
                     log.info(newSession.toString());
 
-                    this.sessionHistoryRepository
+                    return this.sessionHistoryRepository
                             .save(SessionHistory.builder()
                                     .operationType(Constants.SESSION_HISTORY_DELETE)
                                     .sessionId(session)
@@ -170,17 +171,74 @@ public class SessionService {
                                     .serialNo(serialNo)
                                     .description(newSession.getDescription())
                                     .build())
-                            .subscribe(sessionHistory -> {
+                            .flatMap(sessionHistory -> {
                                 log.info(Constants.SESSION_OPERATION_SERIAL_NO + serialNo);
                                 log.info(sessionHistory.toString());
+
+                                this.sessionRepository
+                                        .deleteById(session)
+                                        .subscribe();
+                                return Mono.empty().then();
                             });
+                    });
+    }
 
-                    this.sessionRepository
-                            .deleteById(session)
-                            .subscribe();
+    /**
+     * 方法：删除会话，并移入历史库
+     * @param serialNo 流水号
+     * @param appType 应用类型
+     * @param category 类别（企业）
+     * @param user 用户编号
+     * @param session 会话编号
+     * @return 更换后的token
+     */
+    public Mono<Token> updateSession(String serialNo,
+                                     String appType,
+                                     String category,
+                                     String user,
+                                     String session) {
+        log.info(Constants.SESSION_OPERATION_SERIAL_NO + serialNo);
+
+        return this.sessionRepository
+                .findById(session)
+                .flatMap(oldSession ->
+                    this.sessionRepository.save(Session
+                            .builder()
+                            .type(Constants.SESSION_TYPE_COMMON)
+                            .appType(appType)
+                            .category(category)
+                            .user(user)
+                            .userName(oldSession.getUserName())
+                            .mobile(oldSession.getMobile())
+                            .address(oldSession.getAddress())
+                            .createTime(Clock.currentTime())
+                            .loginTime(Clock.currentTime())
+                            .timestamp(Clock.currentTime())
+                            .status(Constants.SESSION_STATUS_LOGIN)
+                            .lifeTime(this.tokenProperty.getLifeTime())
+                            .build())
+                )
+                .flatMap(newSession -> {
+                    try {
+                        return Mono.just(Token.builder()
+                                .session(newSession.getId())
+                                .user(user)
+                                .lifeTime(this.tokenProperty.getLifeTime())
+                                .jwt(JsonWebTokenUtil.generateJsonWebToken(newSession.getId(), appType, newSession.getAddress(),
+                                        tokenProperty.getKey(), tokenProperty.getCompany(), tokenProperty.getAudience(),
+                                        tokenProperty.getIssuer(), tokenProperty.getLifeTime()))
+                                .downPublicKey(this.crypt.getDownPublicKey(appType))
+                                .upPrivateKey(this.crypt.getUpPrivateKey(appType))
+                                .status(Constants.SESSION_ERRORCODE_SUCCESS)
+                                .build());
+                    } catch (Exception e) {
+                        StackTracer.printException(e);
+                        return Mono.just(Token.builder()
+                                .lifeTime(0L)
+                                .status(Constants.SESSION_ERRORCODE_CREATE_FAILED)
+                                .build());
+                    }
                 });
-
-        return Mono.empty().then();
     }
 
     /**
@@ -302,17 +360,17 @@ public class SessionService {
      * @param category 类别（企业）
      * @return 空
      */
-    public Mono<Void> deleteAttempts(String serialNo,
+    public Flux<Void> deleteAttempts(String serialNo,
                                      String userName,
                                      String appType,
                                      String category) {
-        this.attemptRepository
+        return this.attemptRepository
                 .findByUserNameAndAppTypeAndCategory(userName, appType, category)
-                .subscribe(attempt -> {
+                .flatMap(attempt -> {
                     log.info(Constants.SESSION_OPERATION_SERIAL_NO + serialNo);
                     log.info(attempt.toString());
 
-                    this.attemptHistoryRepository
+                    return this.attemptHistoryRepository
                             .save(AttemptHistory.builder()
                                     .operationType(Constants.SESSION_HISTORY_DELETE)
                                     .attemptId(attempt.getId())
@@ -328,18 +386,17 @@ public class SessionService {
                                     .serialNo(serialNo)
                                     .description(attempt.getDescription())
                                     .build())
-                            .subscribe(attemptHistory -> {
+                            .flatMap(attemptHistory -> {
                                 log.info(Constants.SESSION_OPERATION_SERIAL_NO + serialNo);
                                 log.info(attemptHistory.toString());
-                            })
-                    ;
 
-                    this.attemptRepository
-                            .deleteById(attempt.getId())
-                            .subscribe();
+                                this.attemptRepository
+                                        .deleteById(attempt.getId())
+                                        .subscribe();
+
+                                return Mono.empty().then();
+                            });
                 });
-
-        return Mono.empty().then();
     }
 
     /**

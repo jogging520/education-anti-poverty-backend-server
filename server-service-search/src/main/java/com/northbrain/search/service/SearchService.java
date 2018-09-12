@@ -143,20 +143,19 @@ public class SearchService {
      * @param summaries 摘要
      * @return 无
      */
-    public Mono<Void> deleteSummaries(String serialNo,
+    public Flux<Void> deleteSummaries(String serialNo,
                                       String category,
                                       Flux<Summary> summaries) {
-
-        summaries
+        return summaries
                 .filter(summary -> summary.getCategory().equalsIgnoreCase(category))
-                .subscribe(summary -> {
+                .flatMap(summary -> {
                     log.info(Constants.SEARCH_OPERATION_SERIAL_NO + serialNo);
                     log.info(summary.toString());
 
                     this.summaryRepository
                             .delete(summary);
-                });
 
-        return Mono.empty().then();
+                    return Mono.empty().then();
+                });
     }
 }

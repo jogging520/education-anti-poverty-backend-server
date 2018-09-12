@@ -54,5 +54,6 @@ public class Constants {
      */
     public final static String SESSION_ERRORCODE_SUCCESS                            =   "SUCCESS";
     public final static String SESSION_ERRORCODE_TOKEN_EXPIRED                      =   "ERROR_COMMON_SESSION_TOKEN_EXPIRED";  //token已经失效
+    public final static String SESSION_ERRORCODE_CREATE_FAILED                      =   "ERROR_COMMON_SESSION_CREATE_FAILED";  //token创建失败
 
 }
