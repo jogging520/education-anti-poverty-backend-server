@@ -5,7 +5,7 @@ import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Mono;
 
 public interface ISessionRepository extends ReactiveCrudRepository<Session, String> {
-    Mono<Session> findTop1ByAppTypeAndCategoryAndStatusAndUserNameOOrderByCreateTimeDesc(
+    Mono<Session> findTop1ByAppTypeAndCategoryAndStatusAndUserNameOrderByCreateTimeDesc(
             String appType,
             String category,
             String status,

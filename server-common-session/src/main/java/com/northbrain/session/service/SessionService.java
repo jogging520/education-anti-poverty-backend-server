@@ -72,7 +72,7 @@ public class SessionService {
         }
 
         return this.sessionRepository
-                .findTop1ByAppTypeAndCategoryAndStatusAndUserNameOOrderByCreateTimeDesc(
+                .findTop1ByAppTypeAndCategoryAndStatusAndUserNameOrderByCreateTimeDesc(
                         appType, category, Constants.SESSION_STATUS_LOGIN, decryptedUserName)
                 .switchIfEmpty(
                         this.sessionRepository.save(Session
@@ -184,7 +184,7 @@ public class SessionService {
     }
 
     /**
-     * 方法：删除会话，并移入历史库
+     * 方法：更新会话，并移入历史库
      * @param serialNo 流水号
      * @param appType 应用类型
      * @param category 类别（企业）
@@ -211,11 +211,11 @@ public class SessionService {
                             .userName(oldSession.getUserName())
                             .mobile(oldSession.getMobile())
                             .address(oldSession.getAddress())
-                            .createTime(Clock.currentTime())
-                            .loginTime(Clock.currentTime())
+                            .createTime(oldSession.getCreateTime())
+                            .loginTime(oldSession.getLoginTime())
                             .timestamp(Clock.currentTime())
-                            .status(Constants.SESSION_STATUS_LOGIN)
-                            .lifeTime(this.tokenProperty.getLifeTime())
+                            .status(Constants.SESSION_STATUS_REPLACED)
+                            .lifeTime(oldSession.getLifeTime())
                             .build())
                 )
                 .flatMap(newSession -> {

@@ -6,7 +6,8 @@ public class Constants {
      */
     public final static String SESSION_STATUS_LOGIN                                 =   "LOGIN";            //会话已登录状态
     public final static String SESSION_STATUS_LOGOUT                                =   "LOGOUT";           //会话已主动登出状态
-    public final static String SESSION_STATUS_CLEANED                               =   "CLEANED";          //会话已主动登出状态
+    public final static String SESSION_STATUS_CLEANED                               =   "CLEANED";          //会话已被动登出状态
+    public final static String SESSION_STATUS_REPLACED                              =   "REPLACED";         //会话已被更换状态
 
     public final static String SESSION_HISTORY_CREATE                               =   "CREATE";   //历史归档：创建
     public final static String SESSION_HISTORY_UPDATE                               =   "UPDATE";   //历史归档：更新
