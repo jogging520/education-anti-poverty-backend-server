@@ -16,9 +16,9 @@ public interface IUserRepository extends ReactiveCrudRepository<User, String> {
                                               String status,
                                               String name);
 
-    Mono<User> findByCategoryAndStatusAndMobilesContaining(String category,
-                                                           String status,
-                                                           String mobile);
+    Mono<User> findByCategoryAndStatusAndMobile(String category,
+                                                String status,
+                                                String mobile);
 
     Flux<User> findByCategoryAndStatus(String category,
                                        String status);

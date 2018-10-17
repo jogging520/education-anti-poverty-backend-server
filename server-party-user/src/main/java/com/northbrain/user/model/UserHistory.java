@@ -48,9 +48,9 @@ public class UserHistory {
     private Integer[]               permissions;        //权限
     @NotNull
     private Map<String, String[]>   affiliations;       //归属
-    private String[]                mobiles;            //手机号码
-    private String[]                emails;             //电子邮件
-    private String[]                weChats;            //微信号码
+    private String                  mobile;            //手机号码
+    private String                  email;             //电子邮件
+    private String                  weChat;            //微信号码
     @NotNull
     private Date                    createTime;         //创建时间
     @NotNull
