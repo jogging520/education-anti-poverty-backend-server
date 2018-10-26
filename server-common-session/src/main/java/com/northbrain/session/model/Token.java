@@ -4,7 +4,6 @@ import lombok.*;
 import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 
 /**
  * 类名：令牌
@@ -18,17 +17,29 @@ import java.util.Date;
 @ToString
 public class Token {
     @NotNull
-    private String  session;            //会话编号
+    private String  session;                    //会话编号
     @NotNull
-    private String  user;               //用户编号
+    private String  user;                       //用户编号
     @NotNull
-    private Long    lifeTime;           //寿命时长
+    private Long    lifeTime;                   //寿命时长
     @NotNull
-    private String  jwt;                //jwt
+    private String  jwt;                        //jwt
     @NotNull
-    private String  downPublicKey;      //下行加密密钥（公钥）
+    private String  downPublicKey;              //下行加密公钥
     @NotNull
-    private String  upPrivateKey;       //上行解密密钥（私钥）
+    private String  downPublicKeyExponent;       //下行加密公钥指数Exponent
     @NotNull
-    private String  status;             //状态
+    private String  downPublicKeyModulus;       //下行加密公钥系数Modulus
+    @NotNull
+    private String  upPrivateKey;               //上行解密私钥
+    @NotNull
+    private String  upPrivateKeyExponent;       //上行解密私钥指数Exponent
+    @NotNull
+    private String  upPrivateKeyModulus;        //上行解密私钥系数Modulus
+    @NotNull
+    private String  upPrivateKeyPrimeP;         //上行解密私钥p值
+    @NotNull
+    private String  upPrivateKeyPrimeQ;         //上行解密私钥q值
+    @NotNull
+    private String  status;                     //状态
 }

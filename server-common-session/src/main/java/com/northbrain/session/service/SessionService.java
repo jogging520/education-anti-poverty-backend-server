@@ -13,8 +13,11 @@ import com.northbrain.util.tracer.StackTracer;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.java.Log;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.security.interfaces.RSAPrivateCrtKey;
+import java.security.interfaces.RSAPublicKey;
 import java.util.Map;
 
 @Service
@@ -71,8 +74,8 @@ public class SessionService {
         }
 
         return this.sessionRepository
-                .findByAppTypeAndCategoryAndStatusAndUserName(appType, category,
-                        Constants.SESSION_STATUS_LOGIN, decryptedUserName)
+                .findTop1ByAppTypeAndCategoryAndStatusAndUserNameOrderByCreateTimeDesc(
+                        appType, category, Constants.SESSION_STATUS_LOGIN, decryptedUserName)
                 .switchIfEmpty(
                         this.sessionRepository.save(Session
                                 .builder()
@@ -109,6 +112,9 @@ public class SessionService {
                 .flatMap(
                         session -> {
                             try {
+                                RSAPublicKey rsaPublicKey = this.crypt.getDownRSAPublicKey(appType);
+                                RSAPrivateCrtKey rsaPrivateCrtKey = this.crypt.getUpRSAPrivateKey(appType);
+
                                 return Mono.just(Token.builder()
                                         .session(session.getId())
                                         .user(user)
@@ -117,7 +123,13 @@ public class SessionService {
                                                 tokenProperty.getKey(), tokenProperty.getCompany(), tokenProperty.getAudience(),
                                                 tokenProperty.getIssuer(), tokenProperty.getLifeTime()))
                                         .downPublicKey(this.crypt.getDownPublicKey(appType))
+                                        .downPublicKeyExponent(String.valueOf(rsaPublicKey.getPublicExponent()))
+                                        .downPublicKeyModulus(String.valueOf(rsaPublicKey.getModulus()))
                                         .upPrivateKey(this.crypt.getUpPrivateKey(appType))
+                                        .upPrivateKeyExponent(String.valueOf(rsaPrivateCrtKey.getPrivateExponent()))
+                                        .upPrivateKeyModulus(String.valueOf(rsaPrivateCrtKey.getModulus()))
+                                        .upPrivateKeyPrimeP(String.valueOf(rsaPrivateCrtKey.getPrimeP()))
+                                        .upPrivateKeyPrimeQ(String.valueOf(rsaPrivateCrtKey.getPrimeQ()))
                                         .status(Constants.SESSION_ERRORCODE_SUCCESS)
                                         .build());
                             } catch (Exception e) {
@@ -143,15 +155,15 @@ public class SessionService {
                                     String appType,
                                     String category,
                                     String session) {
-        this.sessionRepository
+        return this.sessionRepository
                 .findById(session)
                 .filter(newSession -> newSession.getAppType().equalsIgnoreCase(appType))
                 .filter(newSession -> newSession.getCategory().equalsIgnoreCase(category))
-                .subscribe(newSession -> {
+                .flatMap(newSession -> {
                     log.info(Constants.SESSION_OPERATION_SERIAL_NO + serialNo);
                     log.info(newSession.toString());
 
-                    this.sessionHistoryRepository
+                    return this.sessionHistoryRepository
                             .save(SessionHistory.builder()
                                     .operationType(Constants.SESSION_HISTORY_DELETE)
                                     .sessionId(session)
@@ -170,17 +182,83 @@ public class SessionService {
                                     .serialNo(serialNo)
                                     .description(newSession.getDescription())
                                     .build())
-                            .subscribe(sessionHistory -> {
+                            .flatMap(sessionHistory -> {
                                 log.info(Constants.SESSION_OPERATION_SERIAL_NO + serialNo);
                                 log.info(sessionHistory.toString());
+
+                                this.sessionRepository
+                                        .deleteById(session)
+                                        .subscribe();
+                                return Mono.empty().then();
                             });
+                    });
+    }
 
-                    this.sessionRepository
-                            .deleteById(session)
-                            .subscribe();
+    /**
+     * 方法：更新会话，并移入历史库
+     * @param serialNo 流水号
+     * @param appType 应用类型
+     * @param category 类别（企业）
+     * @param user 用户编号
+     * @param session 会话编号
+     * @return 更换后的token
+     */
+    public Mono<Token> updateSession(String serialNo,
+                                     String appType,
+                                     String category,
+                                     String user,
+                                     String session) {
+        log.info(Constants.SESSION_OPERATION_SERIAL_NO + serialNo);
+
+        return this.sessionRepository
+                .findById(session)
+                .flatMap(oldSession ->
+                    this.sessionRepository.save(Session
+                            .builder()
+                            .type(Constants.SESSION_TYPE_COMMON)
+                            .appType(appType)
+                            .category(category)
+                            .user(user)
+                            .userName(oldSession.getUserName())
+                            .mobile(oldSession.getMobile())
+                            .address(oldSession.getAddress())
+                            .createTime(oldSession.getCreateTime())
+                            .loginTime(oldSession.getLoginTime())
+                            .timestamp(Clock.currentTime())
+                            .status(Constants.SESSION_STATUS_REPLACED)
+                            .lifeTime(oldSession.getLifeTime())
+                            .build())
+                )
+                .flatMap(newSession -> {
+                    try {
+                        RSAPublicKey rsaPublicKey = this.crypt.getDownRSAPublicKey(appType);
+                        RSAPrivateCrtKey rsaPrivateCrtKey = this.crypt.getUpRSAPrivateKey(appType);
+
+                        return Mono.just(Token.builder()
+                                .session(newSession.getId())
+                                .user(user)
+                                .lifeTime(this.tokenProperty.getLifeTime())
+                                .jwt(JsonWebTokenUtil.generateJsonWebToken(newSession.getId(), appType, newSession.getAddress(),
+                                        tokenProperty.getKey(), tokenProperty.getCompany(), tokenProperty.getAudience(),
+                                        tokenProperty.getIssuer(), tokenProperty.getLifeTime()))
+                                .downPublicKey(this.crypt.getDownPublicKey(appType))
+                                .downPublicKeyExponent(String.valueOf(rsaPublicKey.getPublicExponent()))
+                                .downPublicKeyModulus(String.valueOf(rsaPublicKey.getModulus()))
+                                .upPrivateKey(this.crypt.getUpPrivateKey(appType))
+                                .upPrivateKeyExponent(String.valueOf(rsaPrivateCrtKey.getPrivateExponent()))
+                                .upPrivateKeyModulus(String.valueOf(rsaPrivateCrtKey.getModulus()))
+                                .upPrivateKeyPrimeP(String.valueOf(rsaPrivateCrtKey.getPrimeP()))
+                                .upPrivateKeyPrimeQ(String.valueOf(rsaPrivateCrtKey.getPrimeQ()))
+                                .status(Constants.SESSION_ERRORCODE_SUCCESS)
+                                .build());
+                    } catch (Exception e) {
+                        StackTracer.printException(e);
+                        return Mono.just(Token.builder()
+                                .lifeTime(0L)
+                                .status(Constants.SESSION_ERRORCODE_CREATE_FAILED)
+                                .build());
+                    }
                 });
-
-        return Mono.empty().then();
     }
 
     /**
@@ -208,7 +286,8 @@ public class SessionService {
 
             return this.sessionRepository
                     .findById(claims.get(Constants.SESSION_JWT_CLAIMS_SESSION))
-                    .filter(session -> session.getStatus().equalsIgnoreCase(Constants.SESSION_STATUS_LOGIN))
+                    .filter(session -> session.getStatus().equalsIgnoreCase(Constants.SESSION_STATUS_LOGIN) ||
+                            session.getStatus().equalsIgnoreCase(Constants.SESSION_STATUS_REPLACED))
                     .filter(session -> session.getAppType().equalsIgnoreCase(appType) &&
                             session.getAppType().equalsIgnoreCase(claims.get(Constants.SESSION_JWT_CLAIMS_APP_TYPE)))
                     .filter(session -> session.getCategory().equalsIgnoreCase(category))
@@ -302,17 +381,17 @@ public class SessionService {
      * @param category 类别（企业）
      * @return 空
      */
-    public Mono<Void> deleteAttempts(String serialNo,
+    public Flux<Void> deleteAttempts(String serialNo,
                                      String userName,
                                      String appType,
                                      String category) {
-        this.attemptRepository
+        return this.attemptRepository
                 .findByUserNameAndAppTypeAndCategory(userName, appType, category)
-                .subscribe(attempt -> {
+                .flatMap(attempt -> {
                     log.info(Constants.SESSION_OPERATION_SERIAL_NO + serialNo);
                     log.info(attempt.toString());
 
-                    this.attemptHistoryRepository
+                    return this.attemptHistoryRepository
                             .save(AttemptHistory.builder()
                                     .operationType(Constants.SESSION_HISTORY_DELETE)
                                     .attemptId(attempt.getId())
@@ -328,18 +407,17 @@ public class SessionService {
                                     .serialNo(serialNo)
                                     .description(attempt.getDescription())
                                     .build())
-                            .subscribe(attemptHistory -> {
+                            .flatMap(attemptHistory -> {
                                 log.info(Constants.SESSION_OPERATION_SERIAL_NO + serialNo);
                                 log.info(attemptHistory.toString());
-                            })
-                    ;
 
-                    this.attemptRepository
-                            .deleteById(attempt.getId())
-                            .subscribe();
+                                this.attemptRepository
+                                        .deleteById(attempt.getId())
+                                        .subscribe();
+
+                                return Mono.empty().then();
+                            });
                 });
-
-        return Mono.empty().then();
     }
 
     /**

@@ -14,6 +14,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.security.*;
+import java.security.interfaces.RSAPrivateCrtKey;
+import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
@@ -322,7 +324,7 @@ public class Crypt {
     }
 
     /**
-     * 方法：获取下行加密公钥
+     * 方法：获取下行加密公钥串
      * @param appType 应用类型
      * @return 下行公钥
      */
@@ -360,7 +362,45 @@ public class Crypt {
     }
 
     /**
-     * 方法：获取上行解密私钥
+     * 方法：获取下行加密公钥
+     * @param appType 应用类型
+     * @return 下行公钥
+     */
+    public RSAPublicKey getDownRSAPublicKey(String appType) {
+        RSAPublicKey downRSAPublicKey;
+
+        switch (appType) {
+            case Constants.UTIL_SECURITY_APP_TYPE_APP:
+                downRSAPublicKey = (RSAPublicKey)getPublicKey(securityProperty.getAppDownPublicKey());
+                break;
+            case Constants.UTIL_SECURITY_APP_TYPE_WEB:
+                downRSAPublicKey = (RSAPublicKey)getPublicKey(securityProperty.getWebDownPublicKey());
+                break;
+            case Constants.UTIL_SECURITY_APP_TYPE_CMS:
+                downRSAPublicKey = (RSAPublicKey)getPublicKey(securityProperty.getCmsDownPublicKey());
+                break;
+            case Constants.UTIL_SECURITY_APP_TYPE_LED:
+                downRSAPublicKey = (RSAPublicKey)getPublicKey(securityProperty.getLedDownPublicKey());
+                break;
+            case Constants.UTIL_SECURITY_APP_TYPE_MON:
+                downRSAPublicKey = (RSAPublicKey)getPublicKey(securityProperty.getMonDownPublicKey());
+                break;
+            case Constants.UTIL_SECURITY_APP_TYPE_WCT:
+                downRSAPublicKey = (RSAPublicKey)getPublicKey(securityProperty.getWctDownPublicKey());
+                break;
+            case Constants.UTIL_SECURITY_APP_TYPE_WCA:
+                downRSAPublicKey = (RSAPublicKey)getPublicKey(securityProperty.getWcaDownPublicKey());
+                break;
+            default:
+                downRSAPublicKey = null;
+                break;
+        }
+
+        return downRSAPublicKey;
+    }
+
+    /**
+     * 方法：获取上行解密私钥串
      * @param appType 应用类型
      * @return 解密私钥
      */
@@ -395,6 +435,44 @@ public class Crypt {
         }
 
         return upPrivateKey;
+    }
+
+    /**
+     * 方法：获取上行解密RSA私钥
+     * @param appType 应用类型
+     * @return 解密私钥
+     */
+    public RSAPrivateCrtKey getUpRSAPrivateKey(String appType) {
+        RSAPrivateCrtKey upRSAPrivateKey;
+
+        switch (appType) {
+            case Constants.UTIL_SECURITY_APP_TYPE_APP:
+                upRSAPrivateKey = (RSAPrivateCrtKey)getPrivateKey(securityProperty.getAppUpPrivateKey());
+                break;
+            case Constants.UTIL_SECURITY_APP_TYPE_WEB:
+                upRSAPrivateKey = (RSAPrivateCrtKey)getPrivateKey(securityProperty.getWebUpPrivateKey());
+                break;
+            case Constants.UTIL_SECURITY_APP_TYPE_CMS:
+                upRSAPrivateKey = (RSAPrivateCrtKey)getPrivateKey(securityProperty.getCmsUpPrivateKey());
+                break;
+            case Constants.UTIL_SECURITY_APP_TYPE_LED:
+                upRSAPrivateKey = (RSAPrivateCrtKey)getPrivateKey(securityProperty.getLedUpPrivateKey());
+                break;
+            case Constants.UTIL_SECURITY_APP_TYPE_MON:
+                upRSAPrivateKey = (RSAPrivateCrtKey)getPrivateKey(securityProperty.getMonUpPrivateKey());
+                break;
+            case Constants.UTIL_SECURITY_APP_TYPE_WCT:
+                upRSAPrivateKey = (RSAPrivateCrtKey)getPrivateKey(securityProperty.getWctUpPrivateKey());
+                break;
+            case Constants.UTIL_SECURITY_APP_TYPE_WCA:
+                upRSAPrivateKey = (RSAPrivateCrtKey)getPrivateKey(securityProperty.getWcaUpPrivateKey());
+                break;
+            default:
+                upRSAPrivateKey = null;
+                break;
+        }
+
+        return upRSAPrivateKey;
     }
 
     /**

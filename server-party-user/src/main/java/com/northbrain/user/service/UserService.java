@@ -164,7 +164,7 @@ public class UserService {
                                                String category,
                                                String mobile) {
         return this.userRepository
-                .findByCategoryAndStatusAndMobilesContaining(category,
+                .findByCategoryAndStatusAndMobile(category,
                         Constants.USER_STATUS_ACTIVE, mobile)
                 .flatMap(user -> {
                     log.info(Constants.USER_OPERATION_SERIAL_NO + serialNo);
@@ -239,9 +239,9 @@ public class UserService {
                                             .roles(newUser.getRoles())
                                             .permissions(newUser.getPermissions())
                                             .affiliations(newUser.getAffiliations())
-                                            .mobiles(newUser.getMobiles())
-                                            .emails(newUser.getEmails())
-                                            .weChats(newUser.getWeChats())
+                                            .mobile(newUser.getMobile())
+                                            .email(newUser.getEmail())
+                                            .weChat(newUser.getWeChat())
                                             .createTime(newUser.getCreateTime())
                                             .timestamp(Clock.currentTime())
                                             .status(newUser.getStatus())

@@ -58,7 +58,7 @@ public class SearchController {
      * @return 创建成功的摘要信息
      */
     @DeleteMapping(Constants.SEARCH_HTTP_REQUEST_MAPPING)
-    public ResponseEntity<Mono<Void>> deleteSummaries(@RequestParam String serialNo,
+    public ResponseEntity<Flux<Void>> deleteSummaries(@RequestParam String serialNo,
                                                       @RequestParam String category,
                                                       @RequestBody Flux<Summary> summaries) {
         return ResponseEntity.ok()

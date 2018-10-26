@@ -144,37 +144,36 @@ public class StorageService {
 
             return this.storageRepository
                     .findById(storage)
-                    .flatMap(newStorage -> {
-                        this.storageHistoryRepository
-                                .save(StorageHistory.builder()
-                                        .operationType(Constants.STORAGE_HISTORY_DELETE)
-                                        .storageId(storage)
-                                        .type(newStorage.getType())
-                                        .category(newStorage.getCategory())
-                                        .createTime(newStorage.getCreateTime())
+                    .flatMap(newStorage ->
+                            this.storageHistoryRepository
+                            .save(StorageHistory.builder()
+                                    .operationType(Constants.STORAGE_HISTORY_DELETE)
+                                    .storageId(storage)
+                                    .type(newStorage.getType())
+                                    .category(newStorage.getCategory())
+                                    .createTime(newStorage.getCreateTime())
+                                    .timestamp(Clock.currentTime())
+                                    .status(newStorage.getStatus())
+                                    .serialNo(serialNo)
+                                    .description(newStorage.getDescription())
+                                    .build())
+                            .flatMap((storageHistory) -> {
+                                this.storageRepository
+                                        .deleteById(storage)
+                                        .subscribe();
+
+                                return Mono.just(Storage.builder()
+                                        .id(storage)
+                                        .type(type)
+                                        .name(storePath.getFullPath())
+                                        .category(category)
+                                        .createTime(Clock.currentTime())
                                         .timestamp(Clock.currentTime())
-                                        .status(newStorage.getStatus())
+                                        .status(Constants.STORAGE_ERRORCODE_SUCCESS)
                                         .serialNo(serialNo)
-                                        .description(newStorage.getDescription())
-                                        .build())
-                                .subscribe();
-
-                        this.storageRepository
-                                .deleteById(storage)
-                                .subscribe();
-
-                        return Mono.just(Storage.builder()
-                                .id(storage)
-                                .type(type)
-                                .name(storePath.getFullPath())
-                                .category(category)
-                                .createTime(Clock.currentTime())
-                                .timestamp(Clock.currentTime())
-                                .status(Constants.STORAGE_ERRORCODE_SUCCESS)
-                                .serialNo(serialNo)
-                                .description(Constants.STORAGE_AUTO_DESCRIPTION)
-                                .build());
-                    });
+                                        .description(Constants.STORAGE_AUTO_DESCRIPTION)
+                                        .build());
+                            }));
 
         } catch (FdfsUnsupportStorePathException e) {
             StackTracer.printException(e);
