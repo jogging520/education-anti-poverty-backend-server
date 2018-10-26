@@ -27,7 +27,7 @@ public class Token {
     @NotNull
     private String  downPublicKey;              //下行加密公钥
     @NotNull
-    private String downPublicKeyExponent;       //下行加密公钥指数Exponent
+    private String  downPublicKeyExponent;       //下行加密公钥指数Exponent
     @NotNull
     private String  downPublicKeyModulus;       //下行加密公钥系数Modulus
     @NotNull

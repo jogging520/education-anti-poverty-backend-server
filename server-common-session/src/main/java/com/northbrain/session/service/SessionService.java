@@ -286,7 +286,8 @@ public class SessionService {
 
             return this.sessionRepository
                     .findById(claims.get(Constants.SESSION_JWT_CLAIMS_SESSION))
-                    .filter(session -> session.getStatus().equalsIgnoreCase(Constants.SESSION_STATUS_LOGIN))
+                    .filter(session -> session.getStatus().equalsIgnoreCase(Constants.SESSION_STATUS_LOGIN) ||
+                            session.getStatus().equalsIgnoreCase(Constants.SESSION_STATUS_REPLACED))
                     .filter(session -> session.getAppType().equalsIgnoreCase(appType) &&
                             session.getAppType().equalsIgnoreCase(claims.get(Constants.SESSION_JWT_CLAIMS_APP_TYPE)))
                     .filter(session -> session.getCategory().equalsIgnoreCase(category))
