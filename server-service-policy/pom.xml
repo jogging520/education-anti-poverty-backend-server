@@ -3,12 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>server-party-user</artifactId>
+	<artifactId>server-service-policy</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>server-party-user</name>
-	<description>server-party-user</description>
+	<name>server-service-policy</name>
+	<description>server-service-policy</description>
 
 	<parent>
 		<groupId>com.northbrain</groupId>
@@ -28,6 +28,11 @@
 			<groupId>com.northbrain</groupId>
 			<artifactId>server-base-util</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.2</version>
 		</dependency>
 	</dependencies>
 
