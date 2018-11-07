@@ -16,8 +16,6 @@ import lombok.extern.java.Log;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.security.interfaces.RSAPrivateCrtKey;
-import java.security.interfaces.RSAPublicKey;
 import java.util.Map;
 
 @Service
@@ -112,9 +110,6 @@ public class SessionService {
                 .flatMap(
                         session -> {
                             try {
-                                RSAPublicKey rsaPublicKey = this.crypt.getDownRSAPublicKey(appType);
-                                RSAPrivateCrtKey rsaPrivateCrtKey = this.crypt.getUpRSAPrivateKey(appType);
-
                                 return Mono.just(Token.builder()
                                         .session(session.getId())
                                         .user(user)
@@ -123,13 +118,7 @@ public class SessionService {
                                                 tokenProperty.getKey(), tokenProperty.getCompany(), tokenProperty.getAudience(),
                                                 tokenProperty.getIssuer(), tokenProperty.getLifeTime()))
                                         .downPublicKey(this.crypt.getDownPublicKey(appType))
-                                        .downPublicKeyExponent(String.valueOf(rsaPublicKey.getPublicExponent()))
-                                        .downPublicKeyModulus(String.valueOf(rsaPublicKey.getModulus()))
                                         .upPrivateKey(this.crypt.getUpPrivateKey(appType))
-                                        .upPrivateKeyExponent(String.valueOf(rsaPrivateCrtKey.getPrivateExponent()))
-                                        .upPrivateKeyModulus(String.valueOf(rsaPrivateCrtKey.getModulus()))
-                                        .upPrivateKeyPrimeP(String.valueOf(rsaPrivateCrtKey.getPrimeP()))
-                                        .upPrivateKeyPrimeQ(String.valueOf(rsaPrivateCrtKey.getPrimeQ()))
                                         .status(Constants.SESSION_ERRORCODE_SUCCESS)
                                         .build());
                             } catch (Exception e) {
@@ -231,9 +220,6 @@ public class SessionService {
                 )
                 .flatMap(newSession -> {
                     try {
-                        RSAPublicKey rsaPublicKey = this.crypt.getDownRSAPublicKey(appType);
-                        RSAPrivateCrtKey rsaPrivateCrtKey = this.crypt.getUpRSAPrivateKey(appType);
-
                         return Mono.just(Token.builder()
                                 .session(newSession.getId())
                                 .user(user)
@@ -242,13 +228,7 @@ public class SessionService {
                                         tokenProperty.getKey(), tokenProperty.getCompany(), tokenProperty.getAudience(),
                                         tokenProperty.getIssuer(), tokenProperty.getLifeTime()))
                                 .downPublicKey(this.crypt.getDownPublicKey(appType))
-                                .downPublicKeyExponent(String.valueOf(rsaPublicKey.getPublicExponent()))
-                                .downPublicKeyModulus(String.valueOf(rsaPublicKey.getModulus()))
                                 .upPrivateKey(this.crypt.getUpPrivateKey(appType))
-                                .upPrivateKeyExponent(String.valueOf(rsaPrivateCrtKey.getPrivateExponent()))
-                                .upPrivateKeyModulus(String.valueOf(rsaPrivateCrtKey.getModulus()))
-                                .upPrivateKeyPrimeP(String.valueOf(rsaPrivateCrtKey.getPrimeP()))
-                                .upPrivateKeyPrimeQ(String.valueOf(rsaPrivateCrtKey.getPrimeQ()))
                                 .status(Constants.SESSION_ERRORCODE_SUCCESS)
                                 .build());
                     } catch (Exception e) {

@@ -27,19 +27,7 @@ public class Token {
     @NotNull
     private String  downPublicKey;              //下行加密公钥
     @NotNull
-    private String  downPublicKeyExponent;       //下行加密公钥指数Exponent
-    @NotNull
-    private String  downPublicKeyModulus;       //下行加密公钥系数Modulus
-    @NotNull
     private String  upPrivateKey;               //上行解密私钥
-    @NotNull
-    private String  upPrivateKeyExponent;       //上行解密私钥指数Exponent
-    @NotNull
-    private String  upPrivateKeyModulus;        //上行解密私钥系数Modulus
-    @NotNull
-    private String  upPrivateKeyPrimeP;         //上行解密私钥p值
-    @NotNull
-    private String  upPrivateKeyPrimeQ;         //上行解密私钥q值
     @NotNull
     private String  status;                     //状态
 }
