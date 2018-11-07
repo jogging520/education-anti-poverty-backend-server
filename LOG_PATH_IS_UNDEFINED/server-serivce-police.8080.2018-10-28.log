@@ -1,0 +1,192 @@
+2018-10-28 15:23:22.716 8166 [main] INFO  o.s.c.a.AnnotationConfigApplicationContext: 590 - Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@1283bb96: startup date [Sun Oct 28 15:23:22 CST 2018]; root of context hierarchy
+2018-10-28 15:23:23.204 8166 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker: 326 - Bean 'configurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$3ee17fca] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-10-28 15:23:23.844 8166 [main] INFO  org.apache.zookeeper.ZooKeeper: 109 - Client environment:zookeeper.version=3.5.3-beta-8ce24f9e675cbefffb8f21a47e06b42864475a60, built on 04/03/2017 16:19 GMT
+2018-10-28 15:23:23.845 8166 [main] INFO  org.apache.zookeeper.ZooKeeper: 109 - Client environment:host.name=172.16.142.1
+2018-10-28 15:23:23.845 8166 [main] INFO  org.apache.zookeeper.ZooKeeper: 109 - Client environment:java.version=1.8.0_101
+2018-10-28 15:23:23.846 8166 [main] INFO  org.apache.zookeeper.ZooKeeper: 109 - Client environment:java.vendor=Oracle Corporation
+2018-10-28 15:23:23.846 8166 [main] INFO  org.apache.zookeeper.ZooKeeper: 109 - Client environment:java.home=/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/jre
+2018-10-28 15:23:23.847 8166 [main] INFO  org.apache.zookeeper.ZooKeeper: 109 - Client environment:java.class.path=/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/jre/lib/deploy.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/jre/lib/ext/cldrdata.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/jre/lib/ext/dnsns.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/jre/lib/ext/jaccess.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/jre/lib/ext/jfxrt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/jre/lib/ext/localedata.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/jre/lib/ext/nashorn.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/jre/lib/ext/sunec.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/jre/lib/ext/sunjce_provider.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/jre/lib/ext/sunpkcs11.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/jre/lib/ext/zipfs.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/jre/lib/javaws.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/jre/lib/jfxswt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/jre/lib/management-agent.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/jre/lib/plugin.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/lib/ant-javafx.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/lib/dt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/lib/javafx-mx.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/lib/jconsole.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/lib/packager.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/lib/sa-jdi.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/lib/tools.jar:/Users/qiwu/git/education-anti-poverty-backend-server/server-service-policy/target/classes:/Users/qiwu/git/education-anti-poverty-backend-server/server-base-util/target/classes:/Users/qiwu/.m2/repository/org/springframework/boot/spring-boot-starter-aop/2.0.4.RELEASE/spring-boot-starter-aop-2.0.4.RELEASE.jar:/Users/qiwu/.m2/repository/org/springframework/spring-aop/5.0.8.RELEASE/spring-aop-5.0.8.RELEASE.jar:/Users/qiwu/.m2/repository/org/aspectj/aspectjweaver/1.8.13/aspectjweaver-1.8.13.jar:/Users/qiwu/.m2/repository/org/projectlombok/lombok/1.16.2/lombok-1.16.2.jar:/Users/qiwu/.m2/repository/org/springframework/boot/spring-boot-starter-actuator/2.0.4.RELEASE/spring-boot-starter-actuator-2.0.4.RELEASE.jar:/Users/qiwu/.m2/repository/org/springframework/boot/spring-boot-starter/2.0.4.RELEASE/spring-boot-starter-2.0.4.RELEASE.jar:/Users/qiwu/.m2/repository/org/springframework/boot/spring-boot/2.0.4.RELEASE/spring-boot-2.0.4.RELEASE.jar:/Users/qiwu/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/2.0.4.RELEASE/spring-boot-autoconfigure-2.0.4.RELEASE.jar:/Users/qiwu/.m2/repository/org/springframework/boot/spring-boot-starter-logging/2.0.4.RELEASE/spring-boot-starter-logging-2.0.4.RELEASE.jar:/Users/qiwu/.m2/repository/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar:/Users/qiwu/.m2/repository/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.jar:/Users/qiwu/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.10.0/log4j-to-slf4j-2.10.0.jar:/Users/qiwu/.m2/repository/org/apache/logging/log4j/log4j-api/2.10.0/log4j-api-2.10.0.jar:/Users/qiwu/.m2/repository/org/slf4j/jul-to-slf4j/1.7.25/jul-to-slf4j-1.7.25.jar:/Users/qiwu/.m2/repository/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.jar:/Users/qiwu/.m2/repository/org/springframework/spring-core/5.0.8.RELEASE/spring-core-5.0.8.RELEASE.jar:/Users/qiwu/.m2/repository/org/springframework/spring-jcl/5.0.8.RELEASE/spring-jcl-5.0.8.RELEASE.jar:/Users/qiwu/.m2/repository/org/yaml/snakeyaml/1.19/snakeyaml-1.19.jar:/Users/qiwu/.m2/repository/org/springframework/boot/spring-boot-actuator-autoconfigure/2.0.4.RELEASE/spring-boot-actuator-autoconfigure-2.0.4.RELEASE.jar:/Users/qiwu/.m2/repository/org/springframework/boot/spring-boot-actuator/2.0.4.RELEASE/spring-boot-actuator-2.0.4.RELEASE.jar:/Users/qiwu/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.9.6/jackson-databind-2.9.6.jar:/Users/qiwu/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.9.0/jackson-annotations-2.9.0.jar:/Users/qiwu/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.9.6/jackson-core-2.9.6.jar:/Users/qiwu/.m2/repository/org/springframework/spring-context/5.0.8.RELEASE/spring-context-5.0.8.RELEASE.jar:/Users/qiwu/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.9.6/jackson-datatype-jsr310-2.9.6.jar:/Users/qiwu/.m2/repository/io/micrometer/micrometer-core/1.0.6/micrometer-core-1.0.6.jar:/Users/qiwu/.m2/repository/org/hdrhistogram/HdrHistogram/2.1.10/HdrHistogram-2.1.10.jar:/Users/qiwu/.m2/repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar:/Users/qiwu/.m2/repository/org/springframework/boot/spring-boot-starter-webflux/2.0.4.RELEASE/spring-boot-starter-webflux-2.0.4.RELEASE.jar:/Users/qiwu/.m2/repository/org/springframework/boot/spring-boot-starter-json/2.0.4.RELEASE/spring-boot-starter-json-2.0.4.RELEASE.jar:/Users/qiwu/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.9.6/jackson-datatype-jdk8-2.9.6.jar:/Users/qiwu/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.9.6/jackson-module-parameter-names-2.9.6.jar:/Users/qiwu/.m2/repository/org/springframework/boot/spring-boot-starter-reactor-netty/2.0.4.RELEASE/spring-boot-starter-reactor-netty-2.0.4.RELEASE.jar:/Users/qiwu/.m2/repository/io/projectreactor/ipc/reactor-netty/0.7.8.RELEASE/reactor-netty-0.7.8.RELEASE.jar:/Users/qiwu/.m2/repository/io/netty/netty-codec-http/4.1.27.Final/netty-codec-http-4.1.27.Final.jar:/Users/qiwu/.m2/repository/io/netty/netty-codec/4.1.27.Final/netty-codec-4.1.27.Final.jar:/Users/qiwu/.m2/repository/io/netty/netty-handler/4.1.27.Final/netty-handler-4.1.27.Final.jar:/Users/qiwu/.m2/repository/io/netty/netty-buffer/4.1.27.Final/netty-buffer-4.1.27.Final.jar:/Users/qiwu/.m2/repository/io/netty/netty-transport/4.1.27.Final/netty-transport-4.1.27.Final.jar:/Users/qiwu/.m2/repository/io/netty/netty-resolver/4.1.27.Final/netty-resolver-4.1.27.Final.jar:/Users/qiwu/.m2/repository/io/netty/netty-handler-proxy/4.1.27.Final/netty-handler-proxy-4.1.27.Final.jar:/Users/qiwu/.m2/repository/io/netty/netty-codec-socks/4.1.27.Final/netty-codec-socks-4.1.27.Final.jar:/Users/qiwu/.m2/repository/io/netty/netty-transport-native-epoll/4.1.27.Final/netty-transport-native-epoll-4.1.27.Final-linux-x86_64.jar:/Users/qiwu/.m2/repository/io/netty/netty-common/4.1.27.Final/netty-common-4.1.27.Final.jar:/Users/qiwu/.m2/repository/io/netty/netty-transport-native-unix-common/4.1.27.Final/netty-transport-native-unix-common-4.1.27.Final.jar:/Users/qiwu/.m2/repository/org/hibernate/validator/hibernate-validator/6.0.11.Final/hibernate-validator-6.0.11.Final.jar:/Users/qiwu/.m2/repository/javax/validation/validation-api/2.0.1.Final/validation-api-2.0.1.Final.jar:/Users/qiwu/.m2/repository/org/jboss/logging/jboss-logging/3.3.2.Final/jboss-logging-3.3.2.Final.jar:/Users/qiwu/.m2/repository/com/fasterxml/classmate/1.3.4/classmate-1.3.4.jar:/Users/qiwu/.m2/repository/org/springframework/spring-web/5.0.8.RELEASE/spring-web-5.0.8.RELEASE.jar:/Users/qiwu/.m2/repository/org/springframework/spring-beans/5.0.8.RELEASE/spring-beans-5.0.8.RELEASE.jar:/Users/qiwu/.m2/repository/org/springframework/spring-webflux/5.0.8.RELEASE/spring-webflux-5.0.8.RELEASE.jar:/Users/qiwu/.m2/repository/org/springframework/boot/spring-boot-configuration-processor/2.0.3.RELEASE/spring-boot-configuration-processor-2.0.3.RELEASE.jar:/Users/qiwu/.m2/repository/org/synchronoss/cloud/nio-multipart-parser/1.1.0/nio-multipart-parser-1.1.0.jar:/Users/qiwu/.m2/repository/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar:/Users/qiwu/.m2/repository/org/synchronoss/cloud/nio-stream-storage/1.1.3/nio-stream-storage-1.1.3.jar:/Users/qiwu/.m2/repository/org/springframework/boot/spring-boot-starter-data-mongodb-reactive/2.0.4.RELEASE/spring-boot-starter-data-mongodb-reactive-2.0.4.RELEASE.jar:/Users/qiwu/.m2/repository/org/springframework/data/spring-data-mongodb/2.0.9.RELEASE/spring-data-mongodb-2.0.9.RELEASE.jar:/Users/qiwu/.m2/repository/org/springframework/spring-tx/5.0.8.RELEASE/spring-tx-5.0.8.RELEASE.jar:/Users/qiwu/.m2/repository/org/springframework/spring-expression/5.0.8.RELEASE/spring-expression-5.0.8.RELEASE.jar:/Users/qiwu/.m2/repository/org/springframework/data/spring-data-commons/2.0.9.RELEASE/spring-data-commons-2.0.9.RELEASE.jar:/Users/qiwu/.m2/repository/org/mongodb/mongodb-driver/3.6.4/mongodb-driver-3.6.4.jar:/Users/qiwu/.m2/repository/org/mongodb/bson/3.6.4/bson-3.6.4.jar:/Users/qiwu/.m2/repository/org/mongodb/mongodb-driver-core/3.6.4/mongodb-driver-core-3.6.4.jar:/Users/qiwu/.m2/repository/org/mongodb/mongodb-driver-async/3.6.4/mongodb-driver-async-3.6.4.jar:/Users/qiwu/.m2/repository/org/mongodb/mongodb-driver-reactivestreams/1.7.1/mongodb-driver-reactivestreams-1.7.1.jar:/Users/qiwu/.m2/repository/org/reactivestreams/reactive-streams/1.0.2/reactive-streams-1.0.2.jar:/Users/qiwu/.m2/repository/io/projectreactor/reactor-core/3.1.8.RELEASE/reactor-core-3.1.8.RELEASE.jar:/Users/qiwu/.m2/repository/org/springframework/cloud/spring-cloud-starter-zookeeper-config/2.0.0.RELEASE/spring-cloud-starter-zookeeper-config-2.0.0.RELEASE.jar:/Users/qiwu/.m2/repository/org/springframework/cloud/spring-cloud-starter-zookeeper/2.0.0.RELEASE/spring-cloud-starter-zookeeper-2.0.0.RELEASE.jar:/Users/qiwu/.m2/repository/org/springframework/cloud/spring-cloud-commons/2.0.0.RELEASE/spring-cloud-commons-2.0.0.RELEASE.jar:/Users/qiwu/.m2/repository/org/springframework/cloud/spring-cloud-zookeeper-core/2.0.0.RELEASE/spring-cloud-zookeeper-core-2.0.0.RELEASE.jar:/Users/qiwu/.m2/repository/org/springframework/cloud/spring-cloud-zookeeper-config/2.0.0.RELEASE/spring-cloud-zookeeper-config-2.0.0.RELEASE.jar:/Users/qiwu/.m2/repository/org/apache/curator/curator-recipes/4.0.1/curator-recipes-4.0.1.jar:/Users/qiwu/.m2/repository/org/apache/curator/curator-framework/4.0.1/curator-framework-4.0.1.jar:/Users/qiwu/.m2/repository/org/apache/curator/curator-client/4.0.1/curator-client-4.0.1.jar:/Users/qiwu/.m2/repository/org/apache/zookeeper/zookeeper/3.5.3-beta/zookeeper-3.5.3-beta.jar:/Users/qiwu/.m2/repository/commons-cli/commons-cli/1.2/commons-cli-1.2.jar:/Users/qiwu/.m2/repository/com/google/guava/guava/20.0/guava-20.0.jar:/Users/qiwu/.m2/repository/org/springframework/cloud/spring-cloud-context/2.0.0.RELEASE/spring-cloud-context-2.0.0.RELEASE.jar:/Users/qiwu/.m2/repository/org/springframework/security/spring-security-crypto/5.0.7.RELEASE/spring-security-crypto-5.0.7.RELEASE.jar:/Users/qiwu/.m2/repository/org/apache/commons/commons-lang3/3.7/commons-lang3-3.7.jar
+2018-10-28 15:23:23.848 8166 [main] INFO  org.apache.zookeeper.ZooKeeper: 109 - Client environment:java.library.path=/Users/qiwu/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+2018-10-28 15:23:23.849 8166 [main] INFO  org.apache.zookeeper.ZooKeeper: 109 - Client environment:java.io.tmpdir=/var/folders/nl/66mc2hbj3pj1q87frrq0fwpr0000gn/T/
+2018-10-28 15:23:23.849 8166 [main] INFO  org.apache.zookeeper.ZooKeeper: 109 - Client environment:java.compiler=<NA>
+2018-10-28 15:23:23.849 8166 [main] INFO  org.apache.zookeeper.ZooKeeper: 109 - Client environment:os.name=Mac OS X
+2018-10-28 15:23:23.850 8166 [main] INFO  org.apache.zookeeper.ZooKeeper: 109 - Client environment:os.arch=x86_64
+2018-10-28 15:23:23.850 8166 [main] INFO  org.apache.zookeeper.ZooKeeper: 109 - Client environment:os.version=10.12.6
+2018-10-28 15:23:23.851 8166 [main] INFO  org.apache.zookeeper.ZooKeeper: 109 - Client environment:user.name=qiwu
+2018-10-28 15:23:23.852 8166 [main] INFO  org.apache.zookeeper.ZooKeeper: 109 - Client environment:user.home=/Users/qiwu
+2018-10-28 15:23:23.852 8166 [main] INFO  org.apache.zookeeper.ZooKeeper: 109 - Client environment:user.dir=/Users/qiwu/git/education-anti-poverty-backend-server
+2018-10-28 15:23:23.853 8166 [main] INFO  org.apache.zookeeper.ZooKeeper: 109 - Client environment:os.memory.free=67MB
+2018-10-28 15:23:23.854 8166 [main] INFO  org.apache.zookeeper.ZooKeeper: 109 - Client environment:os.memory.max=1820MB
+2018-10-28 15:23:23.855 8166 [main] INFO  org.apache.zookeeper.ZooKeeper: 109 - Client environment:os.memory.total=126MB
+2018-10-28 15:23:23.955 8166 [main] INFO  o.a.c.f.imps.CuratorFrameworkImpl: 290 - Starting
+2018-10-28 15:23:23.972 8166 [main] INFO  org.apache.zookeeper.ZooKeeper: 865 - Initiating client connection, connectString=localhost:2181 sessionTimeout=60000 watcher=org.apache.curator.ConnectionState@2250b9f2
+2018-10-28 15:23:23.998 8166 [main] INFO  o.apache.zookeeper.ClientCnxnSocket: 236 - jute.maxbuffer value is 4194304 Bytes
+2018-10-28 15:23:24.025 8166 [main-SendThread(localhost:2181)] INFO  org.apache.zookeeper.ClientCnxn: 1113 - Opening socket connection to server localhost/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error)
+2018-10-28 15:23:24.062 8166 [main-SendThread(localhost:2181)] WARN  org.apache.zookeeper.ClientCnxn: 1235 - Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:357)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1214)
+2018-10-28 15:23:24.076 8166 [main] INFO  o.a.c.f.imps.CuratorFrameworkImpl: 332 - Default schema
+2018-10-28 15:23:24.165 8166 [main-SendThread(localhost:2181)] INFO  org.apache.zookeeper.ClientCnxn: 1113 - Opening socket connection to server localhost/0:0:0:0:0:0:0:1:2181. Will not attempt to authenticate using SASL (unknown error)
+2018-10-28 15:23:24.166 8166 [main-SendThread(localhost:2181)] WARN  org.apache.zookeeper.ClientCnxn: 1235 - Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:357)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1214)
+2018-10-28 15:23:25.269 8166 [main-SendThread(localhost:2181)] INFO  org.apache.zookeeper.ClientCnxn: 1113 - Opening socket connection to server localhost/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error)
+2018-10-28 15:23:25.270 8166 [main-SendThread(localhost:2181)] WARN  org.apache.zookeeper.ClientCnxn: 1235 - Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:357)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1214)
+2018-10-28 15:23:25.375 8166 [main-SendThread(localhost:2181)] INFO  org.apache.zookeeper.ClientCnxn: 1113 - Opening socket connection to server localhost/0:0:0:0:0:0:0:1:2181. Will not attempt to authenticate using SASL (unknown error)
+2018-10-28 15:23:25.376 8166 [main-SendThread(localhost:2181)] WARN  org.apache.zookeeper.ClientCnxn: 1235 - Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:357)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1214)
+2018-10-28 15:23:26.483 8166 [main-SendThread(localhost:2181)] INFO  org.apache.zookeeper.ClientCnxn: 1113 - Opening socket connection to server localhost/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error)
+2018-10-28 15:23:26.483 8166 [main-SendThread(localhost:2181)] WARN  org.apache.zookeeper.ClientCnxn: 1235 - Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:357)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1214)
+2018-10-28 15:23:26.587 8166 [main-SendThread(localhost:2181)] INFO  org.apache.zookeeper.ClientCnxn: 1113 - Opening socket connection to server localhost/0:0:0:0:0:0:0:1:2181. Will not attempt to authenticate using SASL (unknown error)
+2018-10-28 15:23:26.589 8166 [main-SendThread(localhost:2181)] WARN  org.apache.zookeeper.ClientCnxn: 1235 - Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:357)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1214)
+2018-10-28 15:23:27.696 8166 [main-SendThread(localhost:2181)] INFO  org.apache.zookeeper.ClientCnxn: 1113 - Opening socket connection to server localhost/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error)
+2018-10-28 15:23:27.697 8166 [main-SendThread(localhost:2181)] WARN  org.apache.zookeeper.ClientCnxn: 1235 - Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:357)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1214)
+2018-10-28 15:23:27.810 8166 [main-SendThread(localhost:2181)] INFO  org.apache.zookeeper.ClientCnxn: 1113 - Opening socket connection to server localhost/0:0:0:0:0:0:0:1:2181. Will not attempt to authenticate using SASL (unknown error)
+2018-10-28 15:23:27.810 8166 [main-SendThread(localhost:2181)] WARN  org.apache.zookeeper.ClientCnxn: 1235 - Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:357)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1214)
+2018-10-28 15:23:28.918 8166 [main-SendThread(localhost:2181)] INFO  org.apache.zookeeper.ClientCnxn: 1113 - Opening socket connection to server localhost/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error)
+2018-10-28 15:23:28.919 8166 [main-SendThread(localhost:2181)] WARN  org.apache.zookeeper.ClientCnxn: 1235 - Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:357)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1214)
+2018-10-28 15:23:29.020 8166 [main-SendThread(localhost:2181)] INFO  org.apache.zookeeper.ClientCnxn: 1113 - Opening socket connection to server localhost/0:0:0:0:0:0:0:1:2181. Will not attempt to authenticate using SASL (unknown error)
+2018-10-28 15:23:29.021 8166 [main-SendThread(localhost:2181)] WARN  org.apache.zookeeper.ClientCnxn: 1235 - Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:357)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1214)
+2018-10-28 15:23:30.126 8166 [main-SendThread(localhost:2181)] INFO  org.apache.zookeeper.ClientCnxn: 1113 - Opening socket connection to server localhost/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error)
+2018-10-28 15:23:30.127 8166 [main-SendThread(localhost:2181)] WARN  org.apache.zookeeper.ClientCnxn: 1235 - Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:357)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1214)
+2018-10-28 15:23:30.229 8166 [main-SendThread(localhost:2181)] INFO  org.apache.zookeeper.ClientCnxn: 1113 - Opening socket connection to server localhost/0:0:0:0:0:0:0:1:2181. Will not attempt to authenticate using SASL (unknown error)
+2018-10-28 15:23:30.230 8166 [main-SendThread(localhost:2181)] WARN  org.apache.zookeeper.ClientCnxn: 1235 - Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:357)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1214)
+2018-10-28 15:23:31.339 8166 [main-SendThread(localhost:2181)] INFO  org.apache.zookeeper.ClientCnxn: 1113 - Opening socket connection to server localhost/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error)
+2018-10-28 15:23:31.339 8166 [main-SendThread(localhost:2181)] WARN  org.apache.zookeeper.ClientCnxn: 1235 - Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:357)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1214)
+2018-10-28 15:23:31.443 8166 [main-SendThread(localhost:2181)] INFO  org.apache.zookeeper.ClientCnxn: 1113 - Opening socket connection to server localhost/0:0:0:0:0:0:0:1:2181. Will not attempt to authenticate using SASL (unknown error)
+2018-10-28 15:23:31.444 8166 [main-SendThread(localhost:2181)] WARN  org.apache.zookeeper.ClientCnxn: 1235 - Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:357)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1214)
+2018-10-28 15:23:32.548 8166 [main-SendThread(localhost:2181)] INFO  org.apache.zookeeper.ClientCnxn: 1113 - Opening socket connection to server localhost/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error)
+2018-10-28 15:23:32.549 8166 [main-SendThread(localhost:2181)] WARN  org.apache.zookeeper.ClientCnxn: 1235 - Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:357)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1214)
+2018-10-28 15:23:32.654 8166 [main-SendThread(localhost:2181)] INFO  org.apache.zookeeper.ClientCnxn: 1113 - Opening socket connection to server localhost/0:0:0:0:0:0:0:1:2181. Will not attempt to authenticate using SASL (unknown error)
+2018-10-28 15:23:32.655 8166 [main-SendThread(localhost:2181)] WARN  org.apache.zookeeper.ClientCnxn: 1235 - Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:357)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1214)
+2018-10-28 15:23:33.759 8166 [main-SendThread(localhost:2181)] INFO  org.apache.zookeeper.ClientCnxn: 1113 - Opening socket connection to server localhost/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error)
+2018-10-28 15:23:33.760 8166 [main-SendThread(localhost:2181)] WARN  org.apache.zookeeper.ClientCnxn: 1235 - Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:357)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1214)
+2018-10-28 15:23:33.861 8166 [main-SendThread(localhost:2181)] INFO  org.apache.zookeeper.ClientCnxn: 1113 - Opening socket connection to server localhost/0:0:0:0:0:0:0:1:2181. Will not attempt to authenticate using SASL (unknown error)
+2018-10-28 15:23:33.861 8166 [main-SendThread(localhost:2181)] WARN  org.apache.zookeeper.ClientCnxn: 1235 - Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:357)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1214)
+2018-10-28 15:23:34.965 8166 [main-SendThread(localhost:2181)] INFO  org.apache.zookeeper.ClientCnxn: 1113 - Opening socket connection to server localhost/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error)
+2018-10-28 15:23:34.966 8166 [main-SendThread(localhost:2181)] WARN  org.apache.zookeeper.ClientCnxn: 1235 - Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:357)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1214)
+2018-10-28 15:23:35.068 8166 [main-SendThread(localhost:2181)] INFO  org.apache.zookeeper.ClientCnxn: 1113 - Opening socket connection to server localhost/0:0:0:0:0:0:0:1:2181. Will not attempt to authenticate using SASL (unknown error)
+2018-10-28 15:23:35.069 8166 [main-SendThread(localhost:2181)] WARN  org.apache.zookeeper.ClientCnxn: 1235 - Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:357)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1214)
+2018-10-28 15:23:36.175 8166 [main-SendThread(localhost:2181)] INFO  org.apache.zookeeper.ClientCnxn: 1113 - Opening socket connection to server localhost/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error)
+2018-10-28 15:23:36.176 8166 [main-SendThread(localhost:2181)] WARN  org.apache.zookeeper.ClientCnxn: 1235 - Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:357)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1214)
+2018-10-28 15:23:36.279 8166 [main-SendThread(localhost:2181)] INFO  org.apache.zookeeper.ClientCnxn: 1113 - Opening socket connection to server localhost/0:0:0:0:0:0:0:1:2181. Will not attempt to authenticate using SASL (unknown error)
+2018-10-28 15:23:36.280 8166 [main-SendThread(localhost:2181)] WARN  org.apache.zookeeper.ClientCnxn: 1235 - Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:357)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1214)
+2018-10-28 15:23:37.383 8166 [main-SendThread(localhost:2181)] INFO  org.apache.zookeeper.ClientCnxn: 1113 - Opening socket connection to server localhost/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error)
+2018-10-28 15:23:37.384 8166 [main-SendThread(localhost:2181)] WARN  org.apache.zookeeper.ClientCnxn: 1235 - Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:357)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1214)
+2018-10-28 15:23:37.485 8166 [main-SendThread(localhost:2181)] INFO  org.apache.zookeeper.ClientCnxn: 1113 - Opening socket connection to server localhost/0:0:0:0:0:0:0:1:2181. Will not attempt to authenticate using SASL (unknown error)
+2018-10-28 15:23:37.485 8166 [main-SendThread(localhost:2181)] WARN  org.apache.zookeeper.ClientCnxn: 1235 - Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:357)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1214)
