@@ -69,26 +69,29 @@ public class StrategyService {
                     log.info(Constants.STRATEGY_OPERATION_SERIAL_NO + serialNo);
                     log.info(strategy.toString());
 
-                    this.strategyHistoryRepository
-                            .save(StrategyHistory.builder()
-                                    .operationType(Constants.STRATEGY_HISTORY_CREATE)
-                                    .strategyId(strategy.getId())
-                                    .type(strategy.getType())
-                                    .name(strategy.getName())
-                                    .appType(appType)
-                                    .category(category)
-                                    .parameters(strategy.getParameters())
-                                    .createTime(strategy.getCreateTime())
-                                    .timestamp(Clock.currentTime())
-                                    .status(strategy.getStatus())
-                                    .serialNo(serialNo)
-                                    .description(strategy.getDescription())
-                                    .build());
 
                     return this.strategyRepository
                             .save(strategy)
-                            .map(newStrategy -> newStrategy
-                                    .setStatus(Constants.STRATEGY_ERRORCODE_SUCCESS));
+                            .map(newStrategy -> {
+                                this.strategyHistoryRepository
+                                        .save(StrategyHistory.builder()
+                                                .operationType(Constants.STRATEGY_HISTORY_CREATE)
+                                                .strategyId(strategy.getId())
+                                                .type(strategy.getType())
+                                                .name(strategy.getName())
+                                                .appType(appType)
+                                                .category(category)
+                                                .parameters(strategy.getParameters())
+                                                .createTime(strategy.getCreateTime())
+                                                .timestamp(Clock.currentTime())
+                                                .status(strategy.getStatus())
+                                                .serialNo(serialNo)
+                                                .description(strategy.getDescription())
+                                                .build())
+                                        .subscribe();
+
+                                return newStrategy.setStatus(Constants.STRATEGY_ERRORCODE_SUCCESS);
+                            });
                 });
     }
 }

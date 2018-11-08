@@ -89,7 +89,8 @@ public class PrivilegeService {
                                                     .status(newRole.getStatus())
                                                     .serialNo(serialNo)
                                                     .description(newRole.getDescription())
-                                                    .build());
+                                                    .build())
+                                            .subscribe();
 
                                     return newRole.setStatus(Constants.PRIVILEGE_ERRORCODE_SUCCESS);
                                 }));
