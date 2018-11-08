@@ -22,12 +22,18 @@ public class Policy {
     @NotNull
     private String                  type;               //类型
     @NotNull
-    private String[]                appTypes;            //终端类型
+    private String[]                appTypes;           //应用类型
     @NotNull
     private String                  category;           //企业类型
     @NotNull
     @Indexed(unique = true)
     private String                  name;               //标题
+    @NotNull
+    private String                  grade;              //级别
+    @NotNull
+    private String[]                keywords;           //关键字
+    @NotNull
+    private int                     readings;           //阅读数量
     @NotNull
     private Date                    createTime;         //创建时间
     @NotNull
@@ -36,6 +42,6 @@ public class Policy {
     private String                  status;             //状态
     @NotNull
     private String                  serialNo;           //操作流水号
+    @NotNull
     private String                  description;        //内容
-
 }

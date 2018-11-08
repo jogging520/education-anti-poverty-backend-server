@@ -10,5 +10,7 @@ public interface IPolicyRepository extends ReactiveCrudRepository<Policy, String
     Flux<Policy> findByCategoryAndStatusAndNameLike(String category,
                                                     String status,
                                                     String name);
-    Mono<Policy> findByName(String name);
+    Mono<Policy> findByCategoryAndStatusAndName(String category,
+                                                String status,
+                                                String name);
 }

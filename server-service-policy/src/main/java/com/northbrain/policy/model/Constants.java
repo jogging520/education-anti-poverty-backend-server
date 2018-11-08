@@ -22,12 +22,12 @@ public class Constants {
     /**
      * 操作定义
      */
-    public final static String  POLICY_OPERATION_SERIAL_NO                    =   "本次操作用户实体的流水号为：";
+    public final static String  POLICY_OPERATION_SERIAL_NO                    =   "本次操作政策实体的流水号为：";
 
     /**
      * 错误码定义
      */
     public final static String  POLICY_ERRORCODE_SUCCESS                      =   "SUCCESS";
     public final static String  POLICY_ERRORCODE_HAS_EXISTS                   =   "ERROR_PARTY_POLICY_HAS_EXISTS";              //郑策已经存在
-    public final static String  POLICY_ERRORCODE_AUTHENTICATION_FAILURE       =   "ERROR_PARTY_POLICY_AUTHENTICATION_FAILURE";  //认证失败
+    public final static String  POLICY_ERRORCODE_NOT_EXISTS                   =   "ERROR_PARTY_POLICY_NOT_EXISTS";              //郑策不存在
 }
