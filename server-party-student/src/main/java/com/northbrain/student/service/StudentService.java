@@ -1,8 +1,6 @@
 package com.northbrain.student.service;
 
-import com.northbrain.student.model.Constants;
-import com.northbrain.student.model.Student;
-import com.northbrain.student.model.StudentHistory;
+import com.northbrain.student.model.*;
 import com.northbrain.student.repository.IStudentHistoryRepository;
 import com.northbrain.student.repository.IStudentRepository;
 import com.northbrain.util.timer.Clock;
@@ -17,7 +15,8 @@ public class StudentService {
     private final IStudentRepository studentRepository;
     private final IStudentHistoryRepository studentHistoryRepository;
 
-    public StudentService(IStudentRepository studentRepository, IStudentHistoryRepository studentHistoryRepository) {
+    public StudentService(IStudentRepository studentRepository,
+                          IStudentHistoryRepository studentHistoryRepository) {
         this.studentRepository = studentRepository;
         this.studentHistoryRepository = studentHistoryRepository;
     }

@@ -274,19 +274,14 @@ public class SessionService {
                     .filter(session -> session.getAddress().equalsIgnoreCase(address) &&
                             session.getAddress().equalsIgnoreCase(claims.get(Constants.SESSION_JWT_CLAIMS_ADDRESS)))
                     .filter(session -> session.getLoginTime().getTime() + session.getLifeTime() >= System.currentTimeMillis())
-                    .switchIfEmpty(Mono.just(Session.builder().build()))
-                    .flatMap(session -> {
-                        if(session.getId() == null)
-                            return Mono.just(Token.builder().lifeTime(0L).build());
-
-                        return Mono.just(Token
+                    .flatMap(session -> Mono.just(Token
                                 .builder()
                                 .session(session.getId())
                                 .lifeTime(tokenProperty.getLifeTime())
                                 .jwt(jwt)
                                 .status(Constants.SESSION_ERRORCODE_SUCCESS)
-                                .build());
-                    });
+                                .build()))
+                    .switchIfEmpty(Mono.just(Token.builder().lifeTime(0L).build()));
         } catch (Exception e) {
             StackTracer.printException(e);
             return Mono.just(Token.builder()
